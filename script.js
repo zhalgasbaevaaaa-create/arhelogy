@@ -97,7 +97,7 @@
         'Қыш ыдыстар (керамика) жасала бастады.',
         'Тасты өңдеудің жаңа тәсілдері: тесу, жылтырату (шлифовка), бұрғылау.',
         'Егіншілік пен мал шаруашылығының алғашқы белгілері пайда болды.',
-        'Тұрақты қоныстар көбейіп, баспаналар салынды.'
+        'Тұрақты қоныстар көбейіп, ошағы мен тұрмыстық жиһазы бар баспаналар салынды.'
       ]
     },
     {
@@ -1238,7 +1238,7 @@
     }
   }
 
-  function renderDonePlaceholder(host, n) {
+  function renderDonePanel(host, n) {
     if (!host) { return; }
     host.innerHTML =
       '<div class="panel"><h3 class="sec-title">✅ LEVEL ' + n + ' · ТАПСЫРМАЛАР ОРЫНДАЛДЫ</h3>' +
@@ -1631,7 +1631,7 @@
      ========================================================================== */
   function renderLevel2(host) {
     var idx = clamp(countKeys(state.l2answers), 0, L2.length);
-    if (idx >= L2.length) { renderDonePlaceholder(host, 2); completeLevel(2); return; }
+    if (idx >= L2.length) { renderDonePanel(host, 2); completeLevel(2); return; }
 
     setTaskCounter(idx + 1, L2.length);
     var t = L2[idx];
@@ -1985,7 +1985,7 @@
      ========================================================================== */
   function renderLevel4(host) {
     var idx = clamp(countKeys(state.l4answers), 0, L4.length);
-    if (idx >= L4.length) { renderDonePlaceholder(host, 4); completeLevel(4); return; }
+    if (idx >= L4.length) { renderDonePanel(host, 4); completeLevel(4); return; }
     var t = L4[idx];
     setTaskCounter(idx + 1, L4.length);
 
@@ -2138,7 +2138,7 @@
      ========================================================================== */
   function renderLevel5(host) {
     var idx = clamp(countKeys(state.l5answers), 0, L5.length);
-    if (idx >= L5.length) { renderDonePlaceholder(host, 5); completeLevel(5); return; }
+    if (idx >= L5.length) { renderDonePanel(host, 5); completeLevel(5); return; }
     var t = L5[idx];
     setTaskCounter(idx + 1, L5.length);
 
