@@ -1211,7 +1211,7 @@
       renderReview(n, body);
       return;
     }
-    try {
+    safeRender(function () {
       switch (n) {
         case 1: renderLevel1(body); break;
         case 2: renderLevel2(body); break;
@@ -1220,11 +1220,30 @@
         case 5: renderLevel5(body); break;
         default: break;
       }
-    } catch (err) {
-      body.innerHTML = '<div class="panel"><p class="sec-desc">Бұл деңгейді көрсету кезінде техникалық ақаулық болды. ' +
-        'Ойынды жалғастыру үшін төмендегі батырманы басыңыз.</p></div>';
-      if (window.console && console.warn) { console.warn('Level render error:', err); }
+    });
+  }
+
+  /* Кез келген рендерлеу қатесі ойынды толық бұзбауы үшін */
+  function safeRender(fn) {
+    try { fn(); }
+    catch (err) {
+      if (window.console && console.warn) { console.warn('Render error:', err); }
+      var h = $('#level-body');
+      if (h && state.level > 0) {
+        h.innerHTML = '<div class="panel"><h3 class="sec-title">⚠️ Техникалық ақаулық</h3>' +
+          '<p class="sec-desc">Тапсырманы көрсету кезінде қате болды. Деңгейді қайта ашу үшін төмендегі батырманы басыңыз.</p>' +
+          '<button type="button" class="btn btn-gold" onclick="location.reload()">🔄 ДЕҢГЕЙДІ ҚАЙТА АШУ</button></div>';
+      }
+      toast('Техникалық ақаулық: деңгейді қайта ашып көріңіз', 'bad', '⚠️', 4000);
     }
+  }
+
+  function renderDonePlaceholder(host, n) {
+    if (!host) { return; }
+    host.innerHTML =
+      '<div class="panel"><h3 class="sec-title">✅ LEVEL ' + n + ' · ТАПСЫРМАЛАР ОРЫНДАЛДЫ</h3>' +
+      '<p class="sec-desc" style="margin:0">Барлық тапсырма аяқталды. Жиналған ұпай: <b>' + state.score +
+      '</b> · Қателер: <b>' + state.mistakes + '</b>.</p></div>';
   }
 
   function setTaskCounter(cur, total) {
@@ -1597,7 +1616,8 @@
         if (typeof cfg.onResult === 'function') { cfg.onResult(false); }
         nextButton();
       } else {
-        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.', cfg.hint || '');
+        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.',
+          cfg.hint || 'Дәлелдерге және артефакттың сипаттамасына қайта назар аударыңыз: дұрыс жауап сол деректерден шығады.');
         btns.forEach(function (bb) { if (!bb.classList.contains('wrong')) { bb.disabled = false; } });
       }
       save();
@@ -1611,7 +1631,7 @@
      ========================================================================== */
   function renderLevel2(host) {
     var idx = clamp(countKeys(state.l2answers), 0, L2.length);
-    if (idx >= L2.length) { completeLevel(2); return; }
+    if (idx >= L2.length) { renderDonePlaceholder(host, 2); completeLevel(2); return; }
 
     setTaskCounter(idx + 1, L2.length);
     var t = L2[idx];
@@ -1630,16 +1650,20 @@
       options: t.options,
       correct: t.correct,
       tip: t.tip,
+      hint: t.tip,
       attempts: 2,
       loseHeart: false,
       onNext: function () {
         if (!state.l2answers[idx]) { markTaskAnswered('l2answers', idx, 'bad'); }
         Timer.hide();
-        host.innerHTML = '';
-        renderLevel2(host);
-        checkLevelDone(2, 'l2answers');
+        safeRender(function () {
+          host.innerHTML = '';
+          renderLevel2(host);
+          checkLevelDone(2, 'l2answers');
+        });
       },
       onResult: function (ok) {
+        if (ok) { addScore(5); }
         markTaskAnswered('l2answers', idx, ok ? 'ok' : 'bad');
         checkLevelDone(2, 'l2answers');
       }
@@ -1655,23 +1679,23 @@
 
   function renderLevel3(host) {
     var list = pendingL3();
-    if (!list.length) { completeLevel(3); return; }
-    var card = list[0];
+    var allDone = list.length === 0;
+    var card = allDone ? null : list[0];
     var doneN = countKeys(state.l3answers);
-    setTaskCounter(doneN + 1, L3.length);
+    setTaskCounter(allDone ? L3.length : doneN + 1, L3.length);
 
     var wrap = document.createElement('div');
     wrap.className = 'task-card';
     wrap.innerHTML =
-      '<span class="task-tag">⏳ ' + esc('Уақыт машинасы · ' + (doneN + 1) + '/' + L3.length) + '</span>' +
-      '<p class="task-question">Карточканы тиісті тарихи кезеңге орналастырыңыз.</p>';
+      '<span class="task-tag">⏳ ' + esc('Уақыт машинасы · ' + (allDone ? L3.length : doneN + 1) + '/' + L3.length) + '</span>' +
+      '<p class="task-question">' + (allDone ? 'Уақыт сызбасы толық құрылды.' : 'Карточканы тиісті тарихи кезеңге орналастырыңыз.') + '</p>';
 
     var board = document.createElement('div');
     board.className = 'dnd-board';
 
     var tray = document.createElement('div');
     tray.className = 'dnd-tray';
-    tray.innerHTML = '<p class="dnd-tray-title">Ағымдағы карточка</p>';
+    tray.innerHTML = '<p class="dnd-tray-title">' + (allDone ? 'Нәтиже' : 'Ағымдағы карточка') + '</p>';
     var trayItems = document.createElement('div');
     trayItems.className = 'dnd-tray-items';
     tray.appendChild(trayItems);
@@ -1696,27 +1720,36 @@
 
       /* бұрын орналастырылған карточкалар */
       L3.forEach(function (c) {
-        if (c.period === p.id && state.l3answers[c.id] && c.id !== card.id) {
-          var placed = buildL3Card(c, true);
-          $('.dz-items', z).appendChild(placed);
+        if (c.period === p.id && state.l3answers[c.id] && (!card || c.id !== card.id)) {
+          $('.dz-items', z).appendChild(buildL3Card(c, true));
         }
       });
       if (!$('.dz-items', z).children.length) {
         $('.dz-items', z).innerHTML = '<span class="dz-empty">Бос — карточканы осында апарыңыз</span>';
       }
 
-      z.addEventListener('click', function () { tryPlace(p.id, z, 'tap'); });
-      z.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
-          e.preventDefault();
-          tryPlace(p.id, z, 'key');
-        }
-      });
+      if (!allDone) {
+        z.addEventListener('click', function () { tryPlace(p.id, z, 'tap'); });
+        z.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+            e.preventDefault();
+            tryPlace(p.id, z, 'key');
+          }
+        });
+      }
     });
 
     board.appendChild(tray);
     board.appendChild(zones);
     wrap.appendChild(board);
+
+    if (allDone) {
+      trayItems.innerHTML = '<span class="dz-empty" style="color:#ecdcb9">✅ Барлық карточка өз кезеңіне орналастырылды.</span>';
+      wrap.appendChild(board);
+      host.appendChild(wrap);
+      window.setTimeout(function () { completeLevel(3); }, 950);
+      return;
+    }
 
     var help = document.createElement('p');
     help.className = 'dnd-help';
@@ -1744,10 +1777,12 @@
       markTaskAnswered('l3answers', card.id, ok ? 'ok' : 'bad');
       var host2 = $('#level-body');
       window.setTimeout(function () {
-        if (!host2) { return; }
-        host2.innerHTML = '';
-        renderLevel3(host2);
-        checkLevelDone(3, 'l3answers');
+        safeRender(function () {
+          if (!host2) { return; }
+          host2.innerHTML = '';
+          renderLevel3(host2);
+          checkLevelDone(3, 'l3answers');
+        });
       }, ok ? 780 : 900);
     }
 
@@ -1950,7 +1985,7 @@
      ========================================================================== */
   function renderLevel4(host) {
     var idx = clamp(countKeys(state.l4answers), 0, L4.length);
-    if (idx >= L4.length) { completeLevel(4); return; }
+    if (idx >= L4.length) { renderDonePlaceholder(host, 4); completeLevel(4); return; }
     var t = L4[idx];
     setTaskCounter(idx + 1, L4.length);
 
@@ -2036,15 +2071,18 @@
         attempts: 2,
         loseHeart: true,
         onResult: function (ok) {
+          if (ok) { addScore(5); }
           markTaskAnswered('l4answers', idx, ok ? 'ok' : 'bad');
           checkLevelDone(4, 'l4answers');
         },
         onNext: function () {
           if (!state.l4answers[idx]) { markTaskAnswered('l4answers', idx, 'bad'); }
-          stepBody.innerHTML = '';
-          host.innerHTML = '';
-          renderLevel4(host);
-          checkLevelDone(4, 'l4answers');
+          safeRender(function () {
+            stepBody.innerHTML = '';
+            host.innerHTML = '';
+            renderLevel4(host);
+            checkLevelDone(4, 'l4answers');
+          });
         }
       });
       /* сұрақ қайталанбас үшін MCQ ішіндегі мәтінді алып тастаймыз */
@@ -2100,7 +2138,7 @@
      ========================================================================== */
   function renderLevel5(host) {
     var idx = clamp(countKeys(state.l5answers), 0, L5.length);
-    if (idx >= L5.length) { completeLevel(5); return; }
+    if (idx >= L5.length) { renderDonePlaceholder(host, 5); completeLevel(5); return; }
     var t = L5[idx];
     setTaskCounter(idx + 1, L5.length);
 
@@ -2123,9 +2161,11 @@
         onNext: function () {
           if (!state.l5answers[idx]) { markTaskAnswered('l5answers', idx, 'bad'); }
           Timer.hide();
-          host.innerHTML = '';
-          renderLevel5(host);
-          checkLevelDone(5, 'l5answers');
+          safeRender(function () {
+            host.innerHTML = '';
+            renderLevel5(host);
+            checkLevelDone(5, 'l5answers');
+          });
         }
       }));
       return;
@@ -2145,11 +2185,13 @@
       Timer.hide();
       window.setTimeout(function () {
         if (state.hearts <= 0 || state.gameOver) { return; }
-        var h = $('#level-body');
-        if (!h) { return; }
-        h.innerHTML = '';
-        renderLevel5(h);
-        checkLevelDone(5, 'l5answers');
+        safeRender(function () {
+          var h = $('#level-body');
+          if (!h) { return; }
+          h.innerHTML = '';
+          renderLevel5(h);
+          checkLevelDone(5, 'l5answers');
+        });
       }, 900);
     }
 
@@ -2435,7 +2477,8 @@
         node.classList.add('placed');
         node.classList.remove('selected');
         node.setAttribute('aria-pressed', 'false');
-        node.disabled = true;
+        node.setAttribute('aria-disabled', 'true');
+        node.tabIndex = -1;
         if (node.parentNode !== itemsBox) { itemsBox.appendChild(node); }
         zone.classList.add('flash-ok');
         window.setTimeout(function () { zone.classList.remove('flash-ok'); }, 600);
@@ -2809,7 +2852,7 @@
     if (!silentToast) { toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400); }
   }
 
-  function resetAll() {
+  function resetAll(silent) {
     Timer.hide();
     Confetti.stop();
     closeModal();
@@ -2818,7 +2861,7 @@
     updateHUD(false);
     updateStartButtons();
     showScreen('screen-start');
-    toast('Барлық прогресс тазаланды. Жаңа экспедицияға дайын болыңыз!', '', '🔄', 2600);
+    if (!silent) { toast('Барлық прогресс тазаланды. Жаңа экспедицияға дайын болыңыз!', '', '🔄', 2600); }
   }
 
   function updateStartButtons() {
@@ -2876,7 +2919,7 @@
             title: 'ЖАҢА ОЙЫН БАСТАУ?',
             body: '<p class="fb-text">Сақталған прогресс (ұпай, артефактілер, деңгейлер) толық өшіріледі және жаңа экспедиция басталады.</p>',
             actions: [
-              { label: '✅ ИӘ, ЖАҢА ОЙЫН', cls: 'btn-gold', onClick: function () { startNewGame(); openLevel(1); toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400); } },
+              { label: '✅ ИӘ, ЖАҢА ОЙЫН', cls: 'btn-gold', onClick: function () { startNewGame(); openLevel(1); } },
               { label: '← ЖОҚ, БАС МӘЗІР', cls: 'btn-outline' }
             ]
           });
@@ -2884,7 +2927,6 @@
         }
         startNewGame();
         openLevel(1);
-        toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400);
       });
     }
 
@@ -2951,9 +2993,9 @@
       'btn-certificate': function () { Sound.play('click'); showScreen('screen-certificate'); },
       'btn-final-museum': function () { Sound.play('click'); showScreen('screen-museum'); },
       'btn-final-timeline': function () { Sound.play('click'); showScreen('screen-timeline'); },
-      'btn-replay': function () { Sound.play('click'); resetAll(); startNewGame(); openLevel(1); },
+      'btn-replay': function () { Sound.play('click'); resetAll(true); startNewGame(); openLevel(1); },
       'btn-final-home': function () { Sound.play('click'); resetAll(); },
-      'btn-over-replay': function () { Sound.play('click'); resetAll(); startNewGame(); openLevel(1); },
+      'btn-over-replay': function () { Sound.play('click'); resetAll(true); startNewGame(); openLevel(1); },
       'btn-over-home': function () { Sound.play('click'); resetAll(); },
       'btn-cert-back': function () { Sound.play('click'); showScreen('screen-final'); }
     };

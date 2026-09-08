@@ -719,7 +719,7 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 .pool-card.wrongflash{animation:cellShake .4s ease;border-color:var(--bad);}
 .pool-card.dnd-card{touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;}
 .pool-card.dnd-card.dragging{opacity:.4;}
-.pool-card.placed{cursor:default;opacity:1;background:var(--ok-bg);border-color:var(--ok);}
+.pool-card.placed{cursor:default;opacity:1;background:var(--ok-bg);border-color:var(--ok);pointer-events:none;}
 
 .match-wrap{display:grid;gap:10px;grid-template-columns:1fr;}
 .match-col-title{
@@ -735,7 +735,8 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 }
 .match-item:hover:not(.done){transform:translateX(3px);border-color:var(--bronze);}
 .match-item.selected{border-color:var(--gold);background:rgba(217,164,65,.18);}
-.match-item.done{border-color:var(--ok);background:var(--ok-bg);cursor:default;opacity:.9;}
+.match-item.done{border-color:var(--ok);background:var(--ok-bg);cursor:default;opacity:.9;pointer-events:none;}
+.match-item.done:focus-visible{outline:3px solid var(--gold-lt);}
 .match-item.wrongflash{animation:cellShake .4s ease;border-color:var(--bad);}
 
 .bins{display:grid;gap:10px;grid-template-columns:1fr;}
@@ -1058,7 +1059,7 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 }
 body:not(.has-nav) .toast-wrap{bottom:22px;}
 .toast{
-  pointer-events:auto;width:100%;
+  pointer-events:none;width:100%;
   background:linear-gradient(180deg, rgba(43,29,17,.97), rgba(27,18,11,.97));
   border:1px solid rgba(242,199,108,.45);
   border-radius:var(--r-md);padding:11px 14px;
@@ -1128,6 +1129,16 @@ body:not(.has-nav) .toast-wrap{bottom:22px;}
   .cert-results{grid-template-columns:repeat(4,minmax(0,1fr));}
   .task-question{font-size:1.3rem;}
   .dnd-board{grid-template-columns:1fr;}
+}
+
+@media (max-width:479px){
+  .hud-inner{padding:6px 10px 8px;gap:6px;}
+  .stat{font-size:12px;gap:4px;}
+  .stat-ico{font-size:13px;}
+  .icon-btn{min-height:30px;padding:4px 9px;font-size:11px;}
+  .progress-track{height:8px;}
+  .progress-title{font-size:9.5px;letter-spacing:.12em;}
+  .level-head{padding:14px;}
 }
 
 @media (max-width:359px){
