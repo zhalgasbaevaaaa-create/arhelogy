@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#241a11">
+<meta name="description" content="Археологтың құпия қазбасы — Тастан қолаға дейін. Ежелгі Қазақстан аумағындағы тас және қола дәуіріне арналған интерактивті тарихи ойын.">
+<title>Археологтың құпия қазбасы · Тастан қолаға дейін</title>
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%BA%3C/text%3E%3C/svg%3E">
+
+<!-- Lora (тақырыптар). Жүктелмесе — Georgia/Times New Roman fallback жұмыс істейді -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&amp;display=swap" media="print" onload="this.media='all'">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Негізгі мазмұнға өту</a>
+
+<!-- ===== ФОН: археологиялық қабаттар ===== -->
+<div class="bg" aria-hidden="true">
+  <div class="bg-strata"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-grain"></div>
+  <div class="bg-glow"></div>
+  <span class="mote m1"></span><span class="mote m2"></span><span class="mote m3"></span>
+  <span class="mote m4"></span><span class="mote m5"></span><span class="mote m6"></span>
+</div>
+
+<!-- ===== HUD ===== -->
+<header class="hud" id="hud" hidden>
+  <div class="hud-inner">
+    <div class="hud-stats">
+      <div class="stat" title="Жиналған ұпай">
+        <span class="stat-ico" aria-hidden="true">⭐</span>
+        <span class="stat-lab">ҰПАЙ:</span>
+        <span class="stat-val" id="hud-score">0</span>
+      </div>
+      <div class="stat" title="Табылған артефактілер">
+        <span class="stat-ico" aria-hidden="true">🏺</span>
+        <span class="stat-lab">АРТЕФАКТ:</span>
+        <span class="stat-val" id="hud-artifacts">0/10</span>
+      </div>
+      <div class="stat" title="Мүмкіндіктер">
+        <span class="stat-ico" aria-hidden="true">❤️</span>
+        <span class="stat-lab">МҮМКІНДІК:</span>
+        <span class="hearts" id="hud-hearts" role="img" aria-label="3 мүмкіндік қалды"></span>
+      </div>
+    </div>
+
+    <div class="hud-tools">
+      <button type="button" class="icon-btn" id="btn-sound" aria-pressed="false" aria-label="Дыбысты қосу немесе өшіру">
+        <span id="sound-ico" aria-hidden="true">🔊</span><span class="icon-btn-txt">Дыбыс</span>
+      </button>
+      <button type="button" class="icon-btn icon-btn-danger" id="btn-reset" aria-label="Жаңа ойын бастау: барлық прогресс тазаланады">
+        <span aria-hidden="true">🔄</span><span class="icon-btn-txt">Жаңа ойын</span>
+      </button>
+    </div>
+
+    <div class="hud-progress">
+      <div class="progress-head">
+        <span class="progress-title">ЭКСПЕДИЦИЯ ПРОГРЕСІ</span>
+        <span class="progress-pct" id="hud-pct">0%</span>
+      </div>
+      <div class="progress-track" role="progressbar" id="hud-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Экспедиция прогресі">
+        <div class="progress-fill" id="hud-fill"></div>
+      </div>
+      <div class="progress-stage" id="hud-stage">Дайындық</div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ===================== БАС ЭКРАН ===================== -->
+<section class="screen active" id="screen-start" aria-label="Басты экран">
+  <div class="hero">
+    <div class="hero-emblem" aria-hidden="true">
+      <span class="hero-pot">🏺</span>
+      <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+    </div>
+    <h1 class="hero-title">
+      <span class="line">АРХЕОЛОГТЫҢ</span>
+      <span class="line">ҚҰПИЯ ҚАЗБАСЫ</span>
+    </h1>
+    <p class="hero-sub">«Тастан қолаға дейін»</p>
+    <p class="hero-desc">Археологиялық дәлелдерді зерттеп, ежелгі адамдардың өмірін қалпына келтір.</p>
+
+    <div class="hero-actions">
+      <button type="button" class="btn btn-hero" id="btn-start">
+        <span aria-hidden="true">▶</span> ОЙЫНДЫ БАСТАУ
+      </button>
+      <button type="button" class="btn btn-outline" id="btn-continue" hidden>
+        <span aria-hidden="true">⏳</span> ОЙЫНДЫ ЖАЛҒАСТЫРУ
+      </button>
+    </div>
+
+    <ul class="hero-chips" aria-label="Ойынның қысқаша мазмұны">
+      <li>5 деңгей</li><li>10 артефакт</li><li>Ежелгі Қазақстан</li><li>Тіркелусіз</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== ОЙЫН ЭКРАНЫ (барлық деңгейлер) ===================== -->
+<section class="screen" id="screen-game" aria-label="Ойын деңгейі">
+  <div class="panel level-head">
+    <div class="level-top">
+      <span class="level-badge">LEVEL <b id="lvl-num">1</b></span>
+      <div class="level-meta">
+        <div class="timer" id="timer-box" hidden>
+          <span aria-hidden="true">⏱</span>
+          <span id="timer-val">20</span>
+          <span class="sr-only" id="timer-sr"></span>
+        </div>
+        <div class="task-counter" id="task-counter">1 / 10</div>
+      </div>
+    </div>
+    <h2 class="level-title" id="lvl-title">🔎 ҚАЗБА АЛАҢЫ</h2>
+    <p class="level-desc" id="lvl-desc"></p>
+  </div>
+
+  <div id="level-body"></div>
+
+  <div class="level-actions">
+    <button type="button" class="btn btn-ghost" id="btn-to-map">
+      <span aria-hidden="true">🗺️</span> Экспедиция картасы
+    </button>
+  </div>
+</section>
+
+<!-- ===================== ЭКСПЕДИЦИЯ КАРТАСЫ ===================== -->
+<section class="screen" id="screen-expedition" aria-label="Экспедиция картасы">
+  <div class="panel">
+    <h2 class="sec-title">🗺️ ЭКСПЕДИЦИЯ</h2>
+    <p class="sec-desc">Деңгейлер ретімен ашылады. Құлыпталған деңгейге өту үшін алдыңғысын аяқтаңыз.</p>
+  </div>
+  <div class="levels-list" id="levels-list"></div>
+</section>
+
+<!-- ===================== МУЗЕЙ ===================== -->
+<section class="screen" id="screen-museum" aria-label="Археологиялық мұражай">
+  <div class="panel">
+    <h2 class="sec-title">🏺 МЕНІҢ АРТЕФАКТТАРЫМ</h2>
+    <p class="sec-desc">Қазба алаңынан табылған заттар осында сақталады. Карточканы басып, артефакт туралы мәліметті оқыңыз.</p>
+    <div class="museum-count"><span id="museum-count">0</span> / 10 табылды</div>
+  </div>
+  <div class="museum-grid" id="museum-grid"></div>
+</section>
+
+<!-- ===================== УАҚЫТ КАРТАСЫ ===================== -->
+<section class="screen" id="screen-timeline" aria-label="Уақыт картасы">
+  <div class="panel">
+    <h2 class="sec-title">⏳ УАҚЫТ КАРТАСЫ</h2>
+    <p class="sec-desc">Ежелгі Қазақстан аумағындағы кезеңдер. Кезеңді басып, негізгі фактыларды көріңіз.</p>
+  </div>
+  <div class="time-line" id="time-line"></div>
+  <div class="panel time-info" id="time-info" hidden></div>
+</section>
+
+<!-- ===================== ФИНАЛ ===================== -->
+<section class="screen" id="screen-final" aria-label="Экспедиция нәтижесі">
+  <div class="final-wrap">
+    <div class="final-trophy" aria-hidden="true">🏆</div>
+    <h2 class="final-title">ЭКСПЕДИЦИЯ АЯҚТАЛДЫ!</h2>
+    <p class="final-sub">Сіз тас дәуірінен қола дәуіріне дейінгі бүкіл жолды өттіңіз.</p>
+
+    <div class="panel final-card">
+      <div class="final-score-row">
+        <div class="final-score">
+          <span class="fs-num" id="final-score">0</span>
+          <span class="fs-max">/ 100</span>
+        </div>
+        <div class="final-rank" id="final-rank">—</div>
+      </div>
+
+      <ul class="final-stats" id="final-stats"></ul>
+
+      <div class="final-actions">
+        <button type="button" class="btn btn-gold" id="btn-certificate">📜 СЕРТИФИКАТ</button>
+        <button type="button" class="btn btn-outline" id="btn-final-museum">🏺 АРТЕФАКТТАРЫМ</button>
+        <button type="button" class="btn btn-outline" id="btn-final-timeline">⏳ УАҚЫТ КАРТАСЫ</button>
+        <button type="button" class="btn btn-ghost" id="btn-replay">🔄 ҚАЙТА ОЙНАУ</button>
+        <button type="button" class="btn btn-ghost" id="btn-final-home">🏠 БАС МӘЗІР</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ОЙЫН АЯҚТАЛДЫ (мүмкіндік бітті) ===================== -->
+<section class="screen" id="screen-gameover" aria-label="Экспедиция тоқтады">
+  <div class="final-wrap">
+    <div class="final-trophy over" aria-hidden="true">🕯️</div>
+    <h2 class="final-title">ЭКСПЕДИЦИЯ АЯҚТАЛДЫ</h2>
+    <p class="final-sub">Мүмкіндіктеріңіз таусылды. Бірақ нағыз археолог ешқашан берілмейді — жаңа экспедицияға шығыңыз.</p>
+    <div class="panel final-card">
+      <ul class="final-stats" id="over-stats"></ul>
+      <div class="final-actions">
+        <button type="button" class="btn btn-gold" id="btn-over-replay">🔄 ҚАЙТА ОЙНАУ</button>
+        <button type="button" class="btn btn-outline" id="btn-over-home">🏠 БАС МӘЗІР</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== СЕРТИФИКАТ ===================== -->
+<section class="screen" id="screen-certificate" aria-label="Сертификат">
+  <div class="cert-actions no-print">
+    <button type="button" class="btn btn-gold" id="btn-print">🖨 БАСЫП ШЫҒАРУ / PDF САҚТАУ</button>
+    <button type="button" class="btn btn-ghost" id="btn-cert-back">← Артқа</button>
+  </div>
+
+  <div class="certificate" id="certificate">
+    <div class="cert-border">
+      <div class="cert-corner tl" aria-hidden="true"></div>
+      <div class="cert-corner tr" aria-hidden="true"></div>
+      <div class="cert-corner bl" aria-hidden="true"></div>
+      <div class="cert-corner br" aria-hidden="true"></div>
+
+      <p class="cert-kicker">БІЛІМ ЭКСПЕДИЦИЯСЫ</p>
+      <div class="cert-seal" aria-hidden="true">🏺</div>
+      <h2 class="cert-title">АРХЕОЛОГТЫҢ ҚҰПИЯ ҚАЗБАСЫ</h2>
+      <p class="cert-sub">Тастан қолаға дейін</p>
+      <p class="cert-body">Осы сертификат иесі ежелгі Қазақстан аумағындағы тас дәуірі мен қола дәуірінің
+        археологиялық ескерткіштерін зерттеп, бес деңгейлі экспедицияны толық аяқтағанын растайды.</p>
+
+      <div class="cert-results">
+        <div class="cert-res"><span class="cr-lab">НӘТИЖЕ</span><span class="cr-val" id="cert-score">0 / 100</span></div>
+        <div class="cert-res"><span class="cr-lab">ДЕҢГЕЙ</span><span class="cr-val" id="cert-rank">—</span></div>
+        <div class="cert-res"><span class="cr-lab">АРТЕФАКТ</span><span class="cr-val" id="cert-artifacts">0 / 10</span></div>
+        <div class="cert-res"><span class="cr-lab">КҮНІ</span><span class="cr-val" id="cert-date">—</span></div>
+      </div>
+
+      <p class="cert-foot">Палеолит · Мезолит · Неолит · Энеолит · Қола дәуірі</p>
+    </div>
+  </div>
+
+  <p class="cert-hint no-print">Кеңес: «Басып шығару» терезесінде мақсат ретінде <b>«PDF ретінде сақтау»</b> опциясын таңдаңыз.</p>
+</section>
+
+</main>
+
+<!-- ===== НАВИГАЦИЯ ===== -->
+<nav class="nav" id="nav" hidden aria-label="Ойын навигациясы">
+  <button type="button" class="nav-btn" data-nav="screen-start">
+    <span class="nav-ico" aria-hidden="true">🏠</span><span class="nav-txt">Басты бет</span>
+  </button>
+  <button type="button" class="nav-btn" data-nav="screen-expedition">
+    <span class="nav-ico" aria-hidden="true">🗺️</span><span class="nav-txt">Экспедиция</span>
+  </button>
+  <button type="button" class="nav-btn" data-nav="screen-museum">
+    <span class="nav-ico" aria-hidden="true">🏺</span><span class="nav-txt">Артефактілер</span>
+  </button>
+  <button type="button" class="nav-btn" data-nav="screen-timeline">
+    <span class="nav-ico" aria-hidden="true">⏳</span><span class="nav-txt">Уақыт картасы</span>
+  </button>
+</nav>
+
+<!-- ===== МОДАЛЬДАР ===== -->
+<div class="modal-back" id="modal-back" hidden></div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+  <div class="modal-card panel">
+    <button type="button" class="modal-x" id="modal-close" aria-label="Терезені жабу">✕</button>
+    <div class="modal-emoji" id="modal-emoji" aria-hidden="true">🏺</div>
+    <h3 class="modal-title" id="modal-title">—</h3>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-actions" id="modal-actions"></div>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast-wrap" id="toast-wrap" aria-live="polite" aria-atomic="false"></div>
+
+<!-- ===== CONFETTI ===== -->
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script src="script.js"></script>
+</body>
+</html>
