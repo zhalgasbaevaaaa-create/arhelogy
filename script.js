@@ -1575,6 +1575,7 @@
         resolved = true;
         setDisabled(true);
         b.classList.add('correct');
+        addScore(typeof cfg.points === 'number' ? cfg.points : 5);
         feedback('ok', '✅ ДҰРЫС!', 'Жауабыңыз қабылданды.', wrong > 0 ? (cfg.tip || cfg.explain || '') : (cfg.tip || ''));
         Sound.play('good');
         if (typeof cfg.onResult === 'function') { cfg.onResult(true); }
@@ -2033,6 +2034,7 @@
         correct: t.correct,
         explain: t.explain,
         tip: t.keyWhy,
+        points: 5,
         attempts: 2,
         loseHeart: true,
         onResult: function (ok) {
@@ -2113,10 +2115,10 @@
         correct: t.correct,
         explain: t.explain,
         tip: t.explain,
+        points: 10,
         attempts: 2,
         loseHeart: true,
         onResult: function (ok) {
-          if (ok) { addScore(10); }
           markTaskAnswered('l5answers', idx, ok ? 'ok' : 'bad');
           checkLevelDone(5, 'l5answers');
         },
