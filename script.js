@@ -97,7 +97,7 @@
         'Қыш ыдыстар (керамика) жасала бастады.',
         'Тасты өңдеудің жаңа тәсілдері: тесу, жылтырату (шлифовка), бұрғылау.',
         'Егіншілік пен мал шаруашылығының алғашқы белгілері пайда болды.',
-        'Тұрақты қоныстар көбейіп, ошағы мен тұрмыстық жиһазы бар баспаналар салынды.'
+        'Тұрақты қоныстар көбейіп, баспаналар салынды.'
       ]
     },
     {
@@ -202,84 +202,124 @@
     {
       art: 'qysh', tag: 'Сараптама №1',
       q: 'Бұл заттың негізгі қызметі қандай?',
-      options: ['Аң аулауға арналған негізгі құрал болған', 'Азық-түлік пен сұйықтық сақтауға арналған', 'Металл балқытуға арналған пеш рөлін атқарған', 'Киім тігуге қолданылатын құрал болған'],
+      options: ['Аң аулау', 'Азық-түлік немесе сұйықтық сақтау', 'Металл балқыту', 'Киім тігу'],
       correct: 1,
       tip: 'Қыш ыдыстар азық-түлік пен сұйықтықты сақтауға, тасымалдауға және тамақ пісіруге пайдаланылған.'
     },
     {
       art: 'mikrolit', tag: 'Сараптама №2',
       q: 'Микролит дегеніміз не?',
-      options: ['Үлкен тас балтаның бір түрі', 'Кішкентай геометриялық пішінді тас құрал', 'Қоладан құйылған әшекей бұйымы болған', 'Саздан жасалған ыдыстың бір сынығы'],
+      options: [
+        'Үлкен тас балта',
+        'Кішкентай геометриялық пішінді тас құрал',
+        'Қоладан құйылған әшекей',
+        'Саздан жасалған ыдыс'
+      ],
       correct: 1,
       tip: 'Микролиттер — мезолит дәуірінің белгісі. Оларды садақ жебесінің ұшына қатарластырып бекіткен.'
     },
     {
       art: 'kolshapky', tag: 'Сараптама №3',
       q: 'Екі жағы өңделген ірі тас құрал — қолшапқы қай дәуірге тән?',
-      options: ['Палеолит, яғни ерте тас дәуіріне', 'Неолит, яғни жаңа тас дәуіріне', 'Энеолит, яғни мыс пен тас дәуіріне', 'Қола дәуірінің ең соңғы кезеңіне'],
+      options: ['Палеолит', 'Неолит', 'Энеолит', 'Қола дәуірі'],
       correct: 0,
       tip: 'Қолшапқы — ерте палеолиттің белгілі құралы. Қазақстанда мұндай құралдар Қаратау жотасының тұрақтарынан табылған.'
     },
     {
       art: 'qanjhar', tag: 'Сараптама №4',
       q: 'Қола неден алынады?',
-      options: ['Тек таза мыстан ғана алынады', 'Мыс пен қалайының қорытпасынан алынады', 'Темір мен көмірдің қоспасынан жасалады', 'Алтын мен күмістің қорытпасы болып табылады'],
+      options: ['Тек мыстан', 'Мыс пен қалайының қорытпасынан', 'Темір мен көмірден', 'Алтын мен күмістен'],
       correct: 1,
       tip: 'Қола — мыс пен қалайының қорытпасы. Қалайы қосылғанда металл берік болады, сондықтан қоладан қару мен құрал жасалды.'
     },
     {
       art: 'jylqy', tag: 'Сараптама №5',
       q: 'Ботай мәдениеті (Солтүстік Қазақстан) қай жаңалығымен әйгілі?',
-      options: ['Жылқыны қолға үйретудің ерте дәлелдерімен', 'Темір қорыту технологиясын алғаш ашқанымен', 'Жазудың алғаш рет пайда болуымен', 'Теңіз саудасы дамыған орталық болуымен'],
+      options: [
+        'Жылқыны қолға үйретудің ерте дәлелдерімен',
+        'Темір қорыту технологиясымен',
+        'Жазудың пайда болуымен',
+        'Теңіз саудасының дамуымен'
+      ],
       correct: 0,
       tip: 'Энеолит дәуіріне жататын Ботай қонысында жылқы сүйектері өте көп мөлшерде табылған. Бұл — жылқыны қолға үйретудің ерте дәлелі ретінде зерттеледі.'
     },
     {
       art: 'dan', tag: 'Сараптама №6',
       q: 'Дәнүккіш тас пен күйдірілген дән қалдықтары нені дәлелдейді?',
-      options: ['Аңшылықтың одан әрі дамығанын дәлелдейді', 'Егіншіліктің пайда болғанын дәлелдеп тұр', 'Металлургияның басталғанын анық көрсетіп тұр', 'Балық аулаудың кең таралуын білдіреді'],
+      options: [
+        'Аңшылықтың одан әрі дамығанын',
+        'Егіншіліктің пайда болғанын',
+        'Металлургияның басталғанын',
+        'Балық аулаудың таралуын'
+      ],
       correct: 1,
       tip: 'Дәнді езуға арналған тастар мен дән қалдықтары — егіншілік шаруашылығының белгісі. Олар неолит дәуірінен бастап кездеседі.'
     },
     {
       art: 'oshaq', tag: 'Сараптама №7',
       q: 'Тұрақтан табылған ошақ қалдығы (күл, көмір) археологқа не береді?',
-      options: ['Отты пайдаланғанын дәлелдейді, тұрақ жасын анықтатады', 'Тек тамақ қалдығын ғана көрсетеді', 'Металл құю технологиясын дәлелдеп береді', 'Егіншіліктің мүлде болмағанын көрсетіп тұр'],
+      options: [
+        'Отты пайдаланғанын дәлелдейді, ал көмір арқылы тұрақтың жасын анықтауға болады',
+        'Тек тамақ қалдығын көрсетеді, басқа мәлімет бермейді',
+        'Металл құю технологиясын дәлелдейді',
+        'Егіншіліктің болмағанын көрсетеді'
+      ],
       correct: 0,
       tip: 'Ошақ — тұрақты қоныстың белгісі. Көмірге айналған ағаш қалдықтары радиокарбондық талдауға жарамды, сондықтан тұрақтың жасын анықтауға көмектеседі.'
     },
     {
       art: 'syiek', tag: 'Сараптама №8',
       q: 'Қазба алаңында тек жабайы аңдардың сүйектері көп болса, қандай қорытынды жасауға болады?',
-      options: ['Қоғам негізінен аңшылықпен күн көрген', 'Мал шаруашылығы толық дамыған болған', 'Тек егіншілікпен ғана айналысып келген', 'Металл өңдеу басым кәсіп болған'],
+      options: [
+        'Қоғам негізінен аңшылықпен күн көрген',
+        'Мал шаруашылығы толық дамыған',
+        'Тек егіншілікпен айналысқан',
+        'Металл өңдеу басым болған'
+      ],
       correct: 0,
       tip: 'Жабайы аң сүйектерінің көптігі — тұтынушы шаруашылықтың (аңшылық пен терімшілік) белгісі. Үй жануарларының сүйектері кейінгі дәуірлерде кездеседі.'
     },
     {
       art: 'kirgish', tag: 'Сараптама №9',
       q: 'Тас қырғыштың негізгі қызметі қандай болған?',
-      options: ['Тері илеу, ағаш пен сүйек өңдеу', 'Дәнді ұнға айналдыру үшін қолданылған', 'Металлды балқытуға арналған құрал болған', 'Ағаштан кеме жасауға пайдаланылған құрал'],
+      options: [
+        'Жануар терісін илеу, ағаш пен сүйекті өңдеу',
+        'Дәнді ұнға айналдыру',
+        'Металлды балқыту',
+        'Кеме жасау'
+      ],
       correct: 0,
       tip: 'Қырғыштың өткір жиегі тері илеуге, ағаш пен сүйекті өңдеуге жарамды. Ол — тас дәуіріндегі ең көп тараған құралдардың бірі.'
     },
     {
       art: 'qysh', tag: 'Сараптама №10',
       q: 'Қыш ыдыс жасау (керамика) Қазақстан аумағында қай дәуірде пайда болды?',
-      options: ['Палеолит дәуірінде кеңінен пайда болды', 'Мезолит дәуірінде кеңінен пайда болды', 'Неолит дәуірінде кеңінен пайда болды', 'Қола дәуірінде кеңінен пайда болды'],
+      options: ['Палеолит', 'Мезолит', 'Неолит', 'Қола дәуірі'],
       correct: 2,
       tip: 'Керамика неолит — жаңа тас дәуірінде пайда болды. Ыдыстың пішіні мен ою-өрнегі мәдениетті және оның кезеңін ажыратуға мүмкіндік береді.'
     },
     {
       art: 'bilezik', tag: 'Сараптама №11',
       q: 'Қола білезік, алқа мен сырғалар ненің белгісі?',
-      options: ['Зергерлік қолөнердің жоғары дамығанын көрсетеді', 'Аңшылық құралының бір түрі болған', 'Егіншілік әдісін көрсететін құрал болған', 'Балық аулау тәсілінің бір қалдығы'],
+      options: [
+        'Зергерлік қолөнердің дамығанын',
+        'Аңшылық құралының түрін',
+        'Егіншілік әдісін',
+        'Балық аулау тәсілін'
+      ],
       correct: 0,
       tip: 'Қола дәуірінде зергерлік бұйымдар кең таралды. Әшекейлер қолөнердің жоғары деңгейін және адамдардың эстетикалық талғамын көрсетеді.'
     },
     {
       art: 'qanjhar', tag: 'Сараптама №12',
       q: 'Қола қанжар қалай жасалған?',
-      options: ['Тасты шабу арқылы жасалып отырған', 'Металды балқытып, қалыпқа құю арқылы', 'Ағашты ойып өңдеу арқылы жасалған', 'Сазды күйдіру арқылы алынған бұйым'],
+      options: [
+        'Тасты шабу арқылы',
+        'Металлды балқытып, қалыпқа құю арқылы',
+        'Ағашты ойып өңдеу арқылы',
+        'Сазды күйдіру арқылы'
+      ],
       correct: 1,
       tip: 'Қола бұйымдарды балқытып, арнайы тас немесе саз қалыпқа құйған. Бұл бірдей құралдарды көптеп жасауға мүмкіндік берді.'
     }
@@ -312,7 +352,12 @@
       key: 1,
       keyWhy: 'Дәнүккіш тас — адамның өзі өнім өндіре бастағанын, яғни егіншіліктің пайда болғанын тікелей дәлелдейді.',
       q: 'Осы археологиялық дәлелдерге сүйене отырып, қоғам өміріндегі қандай өзгерісті анықтауға болады?',
-      options: ['Аңшылық дамыды, өмір салты өзгермеді', 'Өндіруші шаруашылыққа көшіп, отырықшы өмір күшейді', 'Металлургия мүлде жойылып кеткен еді', 'Халық тек балық аулаумен айналысты'],
+      options: [
+        'Аңшылық одан әрі дамыды, өмір салты өзгермеді',
+        'Тұтынушы шаруашылықтан өндіруші шаруашылыққа көшіп, отырықшы өмір күшейді',
+        'Металлургия мүлде жойылды',
+        'Халық тек балық аулаумен айналысты'
+      ],
       correct: 1,
       explain: 'Дәнүккіш тас, үй жануарларының сүйектері, керамика және тұрақты баспана бірге алынғанда бір қорытынды береді: адамдар дайын өнімді тұтынудан өз өнімін өндіруге көшкен және бір жерде ұзақ уақыт тұрған.'
     },
@@ -327,7 +372,12 @@
       key: 3,
       keyWhy: 'Керамиканың болмауы да — маңызды дәлел. Қыш ыдыс неолитте пайда болғандықтан, оның жоқтығы тұрақтың одан ерте кезеңге жататынын көрсетеді.',
       q: 'Бұл тұрақ туралы қандай қорытынды жасауға болады?',
-      options: ['Бұл неолит дәуірінің отырықшы қонысы', 'Қыш ыдысқа дейінгі аңшылық-терімшілік тұрағы болған', 'Бұл қола дәуірінің металлургия орталығы', 'Бұл ерте темір дәуірінің қаласы'],
+      options: [
+        'Бұл — неолит дәуірінің отырықшы қонысы',
+        'Бұл — қыш ыдыс пайда болғанға дейінгі, аңшылық пен терімшілікке негізделген тас дәуірінің тұрағы',
+        'Бұл — қола дәуірінің металлургиялық орталығы',
+        'Бұл — ерте темір дәуірінің қаласы'
+      ],
       correct: 1,
       explain: 'Құралдар тек тастан жасалған, аң сүйектері көп, ал керамика жоқ. Демек бұл тұрақ неолитке дейінгі кезеңге — тас дәуіріне жатады.'
     },
@@ -342,7 +392,12 @@
       key: 0,
       keyWhy: 'Бір жерде жылқы сүйектерінің жаппай кездесуі — жануардың қолға үйретілгенін көрсететін негізгі белгі.',
       q: 'Бұл қоныс қай дәуірге жатады және ол несімен құнды?',
-      options: ['Палеолит, ең көне тас құралдармен', 'Энеолит, жылқы үйрету мен мыс өңдеу', 'Қола дәуірі, темір қарулар кезеңі', 'Мезолит, микролиттер көп тараған кезең'],
+      options: [
+        'Палеолит — ең көне тас құралдарымен',
+        'Энеолит — жылқыны қолға үйретудің ерте дәлелдерімен және мысты алғаш өңдеумен',
+        'Қола дәуірі — темір қарулармен',
+        'Мезолит — микролиттердің көптігімен'
+      ],
       correct: 1,
       explain: 'Жылқы сүйектерінің көптігі мен мыс бұйымдардың пайда болуы — энеолиттің (мыс-тас дәуірінің) белгісі. Тас құралдардың сақталуы да осыған дәлел. Солтүстік Қазақстандағы Ботай қонысы — осындай ескерткіш.'
     },
@@ -357,7 +412,12 @@
       key: 1,
       keyWhy: 'Құйма қалып — металды жай ғана тауып алмай, оны әдейі балқытып, бұйым құйғанын дәлелдейді.',
       q: 'Осы дәлелдер қандай қорытындыға жетелейді?',
-      options: ['Қоғам тек аңшылықпен өмір сүрген', 'Металлургия дамып, маманданған қолөнер пайда болған', 'Адамдар темірді толық өңдеуді меңгерген', 'Бұл жерде өндіріс мүлде болмаған'],
+      options: [
+        'Қоғам тек аңшылықпен өмір сүрген',
+        'Металлургия дамып, қола бұйымдарды қалыпқа құю арқылы жаппай жасаған, маманданған қолөнер пайда болған',
+        'Адамдар темірді өңдеуді толық меңгерген',
+        'Бұл жерде ешқандай өндіріс болмаған'
+      ],
       correct: 1,
       explain: 'Кен іздері, балқыту ошағы және құйма қалыптар толық өндіріс тізбегін көрсетеді: кенді табу → балқыту → қалыпқа құю. Бұл қола дәуіріндегі маманданған қолөнер. Темір келесі — темір дәуірінде кең тарады.'
     },
@@ -372,7 +432,12 @@
       key: 3,
       keyWhy: 'Петроглифтердің жасын тікелей анықтау қиын, сондықтан жанындағы заттай деректер суреттерді нақты кезеңмен байланыстыруға мүмкіндік береді.',
       q: 'Тамғалы петроглифтері туралы қандай қорытынды жасауға болады?',
-      options: ['Қола дәуірінің наным-сенім мен шаруашылық бейнесі', 'Орта ғасырдағы жазу үлгісі болып табылады', 'Палеолиттің алғашқы жазуы деп есептеледі', 'Кейінгі заманның сәндік суреті ғана'],
+      options: [
+        'Олар қола дәуірінің жартас өнері: сол кезеңнің наным-сенімі мен шаруашылығын бейнелейді',
+        'Олар орта ғасырдағы жазу үлгісі',
+        'Олар палеолиттегі адамның алғашқы жазуы',
+        'Олар кейінгі заманда жасалған сәндік сурет'
+      ],
       correct: 0,
       explain: 'Тамғалы петроглифтері қола дәуіріне жатады. Арба, күн пішінді бейнелер мен аң аулау көріністері сол дәуірдің шаруашылығы мен дүниетанымын көрсетеді. Ескерткіш ЮНЕСКО-ның Бүкіләлемдік мұра тізіміне енгізілген.'
     },
@@ -387,7 +452,12 @@
       key: 2,
       keyWhy: 'Мүлікпен бірге жерлеу — адамдардың дүниетанымы мен қоғамдағы мүлік айырмашылығы туралы мәлімет береді.',
       q: 'Жерлеу ғұрпы туралы қандай қорытынды жасауға болады?',
-      options: ['Марқұм ешқандай затсыз жерленген екен', 'Аруаққа табыну болған, мүлікпен бірге жерлеген', 'Бұл жерде жерлеу ғұрпы болмаған', 'Бұл уақытша лагерьдің қалдығы болып шықты'],
+      options: [
+        'Адамдар марқұмды ешқандай затсыз жерлеген',
+        'Аруаққа табыну болған: адамды мүлкі мен азық-түлік ыдысымен бірге жерлеген',
+        'Жерлеу ғұрпы мүлде болмаған',
+        'Бұл — уақытша лагерьдің қалдығы'
+      ],
       correct: 1,
       explain: 'Тас қоршау, құрбандық ыдысы және марқұммен бірге қойылған әшекей — қола дәуіріне (андронов мәдениетіне) тән жерлеу ғұрпы. Мұндай дәлелдер аруаққа табыну мен сол дәуірдегі дүниетанымды көрсетеді.'
     },
@@ -402,7 +472,12 @@
       key: 1,
       keyWhy: 'Үлкен сақтау ыдыстары — өнімнің артық бөлігі жинақталғанын, яғни шаруашылықтың тұрақтылығын көрсетеді.',
       q: 'Осы дәлелдер қоғамның өмір салты туралы не айтады?',
-      options: ['Халық үнемі көшіп-қонып жүріп тұрған', 'Артық өнім жиналып, отырықшы өмір орныққан', 'Адамдар тек аңшылықпен күн көрген', 'Шаруашылық біртіндеп толық тоқтап қалған'],
+      options: [
+        'Халық үнемі көшіп-қонып жүрген',
+        'Артық өнім жинақталып, отырықшы өмір мен қор жасау дәстүрі қалыптасқан',
+        'Адамдар тек аңшылықпен күн көрген',
+        'Шаруашылық толық тоқтаған'
+      ],
       correct: 1,
       explain: 'Қойма, үлкен сақтау ыдыстары және ұзақ тұрған баспаналар артық өнім жинақталғанын дәлелдейді. Артық өнім отырықшылықты бекітіп, қолөнер мен айырбас саудасының дамуына жол ашты.'
     },
@@ -417,7 +492,12 @@
       key: 0,
       keyWhy: 'Қолшапқы — ерте палеолиттің белгілі құралы. Оның болуы тұрақтың өте ерте кезеңге жататынын бірден көрсетеді.',
       q: 'Бұл тұрақты қалай сипаттауға болады?',
-      options: ['Ерте палеолит: құралдар шабу тәсілімен жасалған', 'Мезолит тұрағы: садақ пен жебе қолданылған', 'Неолит тұрағы: егіншілік кеңінен дамыған', 'Энеолит тұрағы: мыс өңделе бастаған'],
+      options: [
+        'Бұл — ерте палеолит тұрағы: құралдар қарапайым, негізгі тәсілі — тасты шабу',
+        'Бұл — мезолит тұрағы: садақ пен жебе қолданылған',
+        'Бұл — неолит тұрағы: егіншілік дамыған',
+        'Бұл — энеолит тұрағы: мыс өңделген'
+      ],
       correct: 0,
       explain: 'Қарапайым шабылған құралдар, ірі жануар сүйектері, микролиттер мен керамиканың жоқтығы тұрақтың ерте палеолитке жататынын көрсетеді. Қазақстан аумағында мұндай құралдар Қаратау жотасынан табылған.'
     }
@@ -428,14 +508,19 @@
     {
       type: 'mcq', tag: '1 · ТЕСТ',
       q: 'Қазақстан аумағындағы ең көне адам тұрақтарының іздері қайдан табылды?',
-      options: ['Қаратау жотасындағы ежелгі тұрақтардан табылды', 'Алтайдың орман алқабынан табылып отыр', 'Каспий теңізінің түбінен табылған екен', 'Сарыарқаның қарағайлы орманынан табылған екен'],
+      options: [
+        'Қаратау жотасынан',
+        'Алтайдың орман алқабынан',
+        'Каспий теңізінің түбінен',
+        'Сарыарқаның қарағайлы орманынан'
+      ],
       correct: 0,
       explain: 'Ең көне тас құралдар Қаратау жотасындағы тұрақтардан табылған: Арыстанды, Тұрғысбай, Шақпақата, Обалысай. Олар Қазақстан аумағының ерте тас дәуірінде мекенделгенін дәлелдейді.'
     },
     {
       type: 'mcq', tag: '2 · АРТЕФАКТ АНЫҚТАУ', art: 'dan',
       q: 'Бұл зат — дәнді езіп, ұнға айналдыруға арналған жалпақ тас. Ол қай шаруашылықтың дәлелі?',
-      options: ['Егіншілік шаруашылығының пайда болғанын дәлелдейді', 'Балық аулау кәсібінің дамығанын көрсетеді', 'Кен қазу жұмыстарының басталғанын білдіреді', 'Тоқымашылық өнерінің дамығанын айғақтап тұр'],
+      options: ['Егіншілік', 'Балық аулау', 'Кен қазу', 'Тоқымашылық'],
       correct: 0,
       explain: 'Дәнүккіш тастар неолит дәуірінен бастап кездеседі және егіншіліктің пайда болғанын дәлелдейді.'
     },
@@ -459,14 +544,24 @@
     {
       type: 'mcq', tag: '5 · ЛОГИКАЛЫҚ ҚОРЫТЫНДЫ',
       q: 'Қазба алаңында микролиттер көп, ал керамика мүлде жоқ. Қандай қорытынды дұрыс?',
-      options: ['Мезолит тұрағы, керамика неолитте пайда болған', 'Бұл қола дәуірінің ірі қонысы', 'Бұл энеолиттің металлургиялық орталығы болған', 'Бұл ерте темір дәуірінің қаласы еді'],
+      options: [
+        'Бұл — мезолит дәуірінің тұрағы, себебі керамика кейінірек, неолитте пайда болды',
+        'Бұл — қола дәуірінің қонысы',
+        'Бұл — энеолит дәуірінің металлургиялық орталығы',
+        'Бұл — ерте темір дәуірінің қаласы'
+      ],
       correct: 0,
       explain: 'Микролит — мезолиттің белгісі. Қыш ыдыс неолитте пайда болғандықтан, оның жоқтығы тұрақтың одан ерте кезеңге жататынын көрсетеді.'
     },
     {
       type: 'mcq', tag: '6 · ТАРИХИ ДӘЛЕЛ',
       q: 'Тамғалы петроглифтері тарих үшін несінен құнды?',
-      options: ['Жазба дерексіз қола дәуірінің өмірін бейнелейді', 'Орта ғасыр сауда келісімін көрсетеді', 'Ежелгі жұлдыз картасын бейнелеп тұр', 'Қала құрылысының жоспарын сипаттап береді'],
+      options: [
+        'Жазба деректері жоқ қола дәуірінің наным-сенімі мен шаруашылығын бейнелейді',
+        'Орта ғасырдағы сауда келісімшартын көрсетеді',
+        'Ежелгі жұлдыз картасын береді',
+        'Қала құрылысының жоспарын сипаттайды'
+      ],
       correct: 0,
       explain: 'Тамғалы жартас суреттері қола дәуіріне жатады: арба, күн пішінді бейнелер, аң аулау көріністері. Петроглифтер — жазба деректердің орнын басатын заттай дереккөз. Ескерткіш 2004 жылы ЮНЕСКО-ның Бүкіләлемдік мұра тізіміне енгізілген.'
     },
@@ -490,21 +585,36 @@
     {
       type: 'mcq', tag: '8 · ДӘУІРДІ АНЫҚТАУ',
       q: 'Энеолит дегеніміз не?',
-      options: ['Мыс-тас дәуірі: таспен қатар мыс қолданылған', 'Тек темір пайдаланылған кейінгі кезең', 'Қыш ыдыс жойылған аралық кезең', 'Мұз басу дәуірінің басталған шағы'],
+      options: [
+        'Мыс-тас дәуірі: тас құралдармен қатар мыс пайдаланылған кезең',
+        'Тек темір пайдаланылған кезең',
+        'Қыш ыдыс жойылған кезең',
+        'Мұз басу дәуірінің басталуы'
+      ],
       correct: 0,
       explain: '«Энеолит» — мыс-тас дәуірі. Бұл кезеңде тас құралдар сақталып, олармен қатар алғашқы металл — мыс өңделе бастады.'
     },
     {
       type: 'mcq', tag: '9 · ТЕХНОЛОГИЯ',
       q: 'Неолитті «жаңа тас дәуірі» деп атауына не себеп болды?',
-      options: ['Тесу, жылтырату, бұрғылау технологиясы пайда болды', 'Темір металы алғаш рет ашылды', 'Тасты пайдалану мүлде тоқтап қалды', 'Құрылыс техникасы біржола жойылып кетті'],
+      options: [
+        'Тасты тесу, жылтырату және бұрғылау технологиясының пайда болуы',
+        'Темірдің ашылуы',
+        'Тасты мүлде пайдаланудың тоқтауы',
+        'Құрылыс техникасының жойылуы'
+      ],
       correct: 0,
       explain: 'Неолитте тасты шабумен қатар тесу, жылтырату (шлифовка) және бұрғылау тәсілдері қолданылды. Бұл құралдардың сапасын күрт жақсартты, сондықтан дәуір «жаңа тас дәуірі» деп аталды.'
     },
     {
       type: 'mcq', tag: '10 · ҚОРЫТЫНДЫ СҰРАҚ',
       q: 'Археологиялық заттай деректер тарих ғылымы үшін неге маңызды?',
-      options: ['Жазусыз ерте кезеңдер тарихын қалпына келтіреді', 'Тек мұражай залын толтыруға қажет', 'Жазба деректерден әлдеқайда маңызды емес', 'Тек өнер тарихына ғана қатысты'],
+      options: [
+        'Жазба деректері жоқ ерте кезеңдердің тарихын қалпына келтіруге мүмкіндік береді',
+        'Тек мұражай залын толтыру үшін қажет',
+        'Олар жазба деректерден әлдеқайда маңызды емес',
+        'Тек өнер тарихына қатысты'
+      ],
       correct: 0,
       explain: 'Тас және қола дәуірлерінен жазба деректер қалмаған. Сондықтан құралдар, керамика, сүйек қалдықтары, тұрақтар мен жартас суреттері — сол кезеңнің шаруашылығын, тұрмысын және дүниетанымын қалпына келтіретін негізгі дереккөз.'
     }
@@ -570,8 +680,7 @@
       l3answers: {},
       l4answers: {},
       l4analysis: {},
-      l5answers: {},
-      l3order: []               /* Level 3 карточкаларының аралас реті */
+      l5answers: {}
     };
   }
 
@@ -613,11 +722,6 @@
     ['l2answers', 'l3answers', 'l4answers', 'l4analysis', 'l5answers'].forEach(function (kk) {
       if (!s[kk] || typeof s[kk] !== 'object' || Array.isArray(s[kk])) { s[kk] = {}; }
     });
-    if (!Array.isArray(s.l3order) || s.l3order.length !== L3.length ||
-        !s.l3order.every(function (id) { return !!cardById(id); }) ||
-        (new Set(s.l3order)).size !== L3.length) {
-      s.l3order = shuffle(L3.map(function (c) { return c.id; }));
-    }
     if (!s.cells || !Array.isArray(s.cells) || s.cells.length !== DIG_COLS_ROWS) { s.cells = null; }
     return s;
   }
@@ -783,9 +887,7 @@
   if (modalClose) { modalClose.addEventListener('click', function () { Sound.play('click'); closeModal(); }); }
   if (modalBack) { modalBack.addEventListener('click', closeModal); }
   document.addEventListener('keydown', function (e) {
-    if (e.key !== 'Escape') { return; }
-    if (isModalOpen()) { closeModal(); return; }
-    closeCellPop();
+    if (e.key === 'Escape' && isModalOpen()) { closeModal(); }
   });
 
   var Confetti = (function () {
@@ -959,7 +1061,6 @@
 
   function showScreen(id) {
     if (SCREENS.indexOf(id) < 0) { id = 'screen-start'; }
-    closeCellPop();
     SCREENS.forEach(function (s) {
       var node = document.getElementById(s);
       if (node) { node.classList.toggle('active', s === id); }
@@ -1045,7 +1146,6 @@
   function completeLevel(n) {
     if (levelCompleted(n)) { return; }
     Timer.hide();
-    closeCellPop();
     state.completedLevels.push(n);
     if (n < 5) { state.unlockedLevel = Math.max(state.unlockedLevel, n + 1); }
     save();
@@ -1111,7 +1211,7 @@
       renderReview(n, body);
       return;
     }
-    safeRender(function () {
+    try {
       switch (n) {
         case 1: renderLevel1(body); break;
         case 2: renderLevel2(body); break;
@@ -1120,30 +1220,11 @@
         case 5: renderLevel5(body); break;
         default: break;
       }
-    });
-  }
-
-  /* Кез келген рендерлеу қатесі ойынды толық бұзбауы үшін */
-  function safeRender(fn) {
-    try { fn(); }
-    catch (err) {
-      if (window.console && console.warn) { console.warn('Render error:', err); }
-      var h = $('#level-body');
-      if (h && state.level > 0) {
-        h.innerHTML = '<div class="panel"><h3 class="sec-title">⚠️ Техникалық ақаулық</h3>' +
-          '<p class="sec-desc">Тапсырманы көрсету кезінде қате болды. Деңгейді қайта ашу үшін төмендегі батырманы басыңыз.</p>' +
-          '<button type="button" class="btn btn-gold" onclick="location.reload()">🔄 ДЕҢГЕЙДІ ҚАЙТА АШУ</button></div>';
-      }
-      toast('Техникалық ақаулық: деңгейді қайта ашып көріңіз', 'bad', '⚠️', 4000);
+    } catch (err) {
+      body.innerHTML = '<div class="panel"><p class="sec-desc">Бұл деңгейді көрсету кезінде техникалық ақаулық болды. ' +
+        'Ойынды жалғастыру үшін төмендегі батырманы басыңыз.</p></div>';
+      if (window.console && console.warn) { console.warn('Level render error:', err); }
     }
-  }
-
-  function renderDonePanel(host, n) {
-    if (!host) { return; }
-    host.innerHTML =
-      '<div class="panel"><h3 class="sec-title">✅ LEVEL ' + n + ' · ТАПСЫРМАЛАР ОРЫНДАЛДЫ</h3>' +
-      '<p class="sec-desc" style="margin:0">Барлық тапсырма аяқталды. Жиналған ұпай: <b>' + state.score +
-      '</b> · Қателер: <b>' + state.mistakes + '</b>.</p></div>';
   }
 
   function setTaskCounter(cur, total) {
@@ -1219,7 +1300,6 @@
   }
 
   function renderLevel1(host) {
-    closeCellPop();
     if (!state.cells) { state.cells = buildCells(); save(); }
     setTaskCounter(state.artifacts.length, ARTIFACTS.length);
     if (state.artifacts.length >= ARTIFACTS.length && !levelCompleted(1)) {
@@ -1352,7 +1432,7 @@
         paintCell(cell, c, i);
         save();
         Sound.play('found');
-        openCellPop(cell, a);
+        toast('АРТЕФАКТ ТАБЫЛДЫ! ' + a.emoji + ' ' + a.name + ' · +5 ұпай', 'gold', '🎉', 2800);
         var found = $('#dig-found');
         if (found) { found.textContent = String(state.artifacts.length); }
         setTaskCounter(state.artifacts.length, ARTIFACTS.length);
@@ -1391,63 +1471,6 @@
       save();
       toast('Геосканер іске қосылды — белгіленген ұяшықты қазыңыз', 'good', '📡', 2400);
     }
-  }
-
-  /* Табылған артефакт: ұяшық үлкейіп, ішіндегі элементтер үлкен көрінеді,
-     жабу батырмасы бар pop-карточка ашылады */
-  var activePop = null;
-
-  function closeCellPop() {
-    if (activePop && activePop.parentNode) { activePop.parentNode.removeChild(activePop); }
-    activePop = null;
-  }
-
-  function openCellPop(cell, a) {
-    if (!cell || !cell.parentNode) { return; }
-    closeCellPop();
-    var grid = cell.parentNode;
-    var pop = document.createElement('div');
-    pop.className = 'cell-pop';
-    pop.style.left = cell.offsetLeft + 'px';
-    pop.style.top = cell.offsetTop + 'px';
-    pop.style.width = Math.max(cell.offsetWidth, 148) + 'px';
-    pop.style.height = Math.max(cell.offsetHeight, 182) + 'px';
-    pop.setAttribute('role', 'dialog');
-    pop.setAttribute('aria-label', a.name + ' табылды. Жабу үшін жабу батырмасын басыңыз.');
-    pop.innerHTML =
-      '<button type="button" class="cp-x" aria-label="Жабу">✕</button>' +
-      '<span class="cp-title">АРТЕФАКТ ТАБЫЛДЫ!</span>' +
-      '<span class="cp-emoji" aria-hidden="true">' + esc(a.emoji) + '</span>' +
-      '<span class="cp-name">' + esc(a.name) + '</span>' +
-      '<span class="cp-period">' + esc(periodById(a.period).name) + '</span>' +
-      '<span class="cp-score">+5 ұпай</span>';
-    grid.appendChild(pop);
-    /* Масштабтан кейін pop тор шекарасынан шығып кетпеуі үшін позицията шектеу қоямыз */
-    var sc = window.matchMedia('(max-width: 479px)').matches ? 1.6 : 1.8;
-    var pw = pop.offsetWidth, ph = pop.offsetHeight;
-    var gw = grid.clientWidth, gh = grid.clientHeight;
-    var drawL = cell.offsetLeft - pw * (sc - 1) / 2;
-    var drawT = cell.offsetTop - ph * (sc - 1) / 2;
-    var maxL = Math.max(2, gw - pw * sc - 2);
-    var maxT = Math.max(2, gh - ph * sc - 2);
-    drawL = Math.max(2, Math.min(drawL, maxL));
-    drawT = Math.max(2, Math.min(drawT, maxT));
-    pop.style.left = (drawL + pw * (sc - 1) / 2) + 'px';
-    pop.style.top = (drawT + ph * (sc - 1) / 2) + 'px';
-    activePop = pop;
-    try { pop.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'smooth' }); } catch (e) { /* ескі браузер */ }
-    $('.cp-x', pop).addEventListener('click', function (e) {
-      e.stopPropagation();
-      Sound.play('click');
-      closeCellPop();
-      try { cell.focus(); } catch (err) { /* ignore */ }
-    });
-    window.setTimeout(function () {
-      if (activePop === pop) {
-        var b = $('.cp-x', pop);
-        if (b) { try { b.focus(); } catch (err) { /* ignore */ } }
-      }
-    }, 80);
   }
 
   function openArtifactModal(id) {
@@ -1507,23 +1530,20 @@
     var attempts = cfg.attempts || 1;
     var wrong = 0;
     var resolved = false;
-    var byOrig = [];   /* түпнұсқа индекс → батырма */
+    var btns = [];
 
-    /* Дұрыс жауап әр ойында әртүрлі нұсқа орындарында тұрады */
-    var order = shuffle(cfg.options.map(function (_, i) { return i; }));
-    order.forEach(function (orig, pos) {
+    cfg.options.forEach(function (txt, i) {
       var b = document.createElement('button');
       b.type = 'button';
       b.className = 'opt';
-      b.innerHTML = '<span class="opt-key" aria-hidden="true">' + (keys[pos] || (pos + 1)) + '</span><span class="opt-txt">' + esc(cfg.options[orig]) + '</span>';
-      b.addEventListener('click', function () { choose(orig, b); });
+      b.innerHTML = '<span class="opt-key" aria-hidden="true">' + (keys[i] || (i + 1)) + '</span><span class="opt-txt">' + esc(txt) + '</span>';
+      b.addEventListener('click', function () { choose(i, b); });
       optBox.appendChild(b);
-      byOrig[orig] = b;
+      btns.push(b);
     });
-    var btns = byOrig.slice();
 
     function setDisabled(v) {
-      btns.forEach(function (b) { if (b) { b.disabled = v; } });
+      btns.forEach(function (b) { b.disabled = v; });
     }
 
     function feedback(kind, title, text, tip) {
@@ -1570,15 +1590,14 @@
       if (wrong >= attempts) {
         resolved = true;
         setDisabled(true);
-        byOrig[cfg.correct].classList.add('correct');
-        btns.forEach(function (bb) { if (bb && bb !== byOrig[cfg.correct] && !bb.classList.contains('wrong')) { bb.classList.add('muted'); } });
+        btns[cfg.correct].classList.add('correct');
+        btns.forEach(function (bb, idx) { if (idx !== cfg.correct && !bb.classList.contains('wrong')) { bb.classList.add('muted'); } });
         feedback('bad', '❌ ҚАТЕ ЖАУАП', 'Дұрыс жауап: ' + cfg.options[cfg.correct] + '.', cfg.tip || cfg.explain || '');
         if (cfg.loseHeart) { loseHeart(); }
         if (typeof cfg.onResult === 'function') { cfg.onResult(false); }
         nextButton();
       } else {
-        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.',
-          cfg.hint || 'Дәлелдерге және артефакттың сипаттамасына қайта назар аударыңыз: дұрыс жауап сол деректерден шығады.');
+        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.', cfg.hint || '');
         btns.forEach(function (bb) { if (!bb.classList.contains('wrong')) { bb.disabled = false; } });
       }
       save();
@@ -1592,7 +1611,7 @@
      ========================================================================== */
   function renderLevel2(host) {
     var idx = clamp(countKeys(state.l2answers), 0, L2.length);
-    if (idx >= L2.length) { renderDonePanel(host, 2); completeLevel(2); return; }
+    if (idx >= L2.length) { completeLevel(2); return; }
 
     setTaskCounter(idx + 1, L2.length);
     var t = L2[idx];
@@ -1611,20 +1630,16 @@
       options: t.options,
       correct: t.correct,
       tip: t.tip,
-      hint: t.tip,
       attempts: 2,
       loseHeart: false,
       onNext: function () {
         if (!state.l2answers[idx]) { markTaskAnswered('l2answers', idx, 'bad'); }
         Timer.hide();
-        safeRender(function () {
-          host.innerHTML = '';
-          renderLevel2(host);
-          checkLevelDone(2, 'l2answers');
-        });
+        host.innerHTML = '';
+        renderLevel2(host);
+        checkLevelDone(2, 'l2answers');
       },
       onResult: function (ok) {
-        if (ok) { addScore(5); }
         markTaskAnswered('l2answers', idx, ok ? 'ok' : 'bad');
         checkLevelDone(2, 'l2answers');
       }
@@ -1634,41 +1649,29 @@
   /* ==========================================================================
      11. LEVEL 3 — УАҚЫТ МАШИНАСЫ (drag & drop + touch)
      ========================================================================== */
-  function cardById(id) {
-    for (var i = 0; i < L3.length; i++) { if (L3[i].id === id) { return L3[i]; } }
-    return null;
-  }
-
-  /* Карточкалар кезең-кезеңімен емес, араласып шығады */
   function pendingL3() {
-    if (!state.l3order || state.l3order.length !== L3.length) {
-      state.l3order = shuffle(L3.map(function (c) { return c.id; }));
-      save();
-    }
-    return state.l3order
-      .map(function (id) { return cardById(id); })
-      .filter(function (c) { return c && !state.l3answers[c.id]; });
+    return L3.filter(function (c) { return !state.l3answers[c.id]; });
   }
 
   function renderLevel3(host) {
     var list = pendingL3();
-    var allDone = list.length === 0;
-    var card = allDone ? null : list[0];
+    if (!list.length) { completeLevel(3); return; }
+    var card = list[0];
     var doneN = countKeys(state.l3answers);
-    setTaskCounter(allDone ? L3.length : doneN + 1, L3.length);
+    setTaskCounter(doneN + 1, L3.length);
 
     var wrap = document.createElement('div');
     wrap.className = 'task-card';
     wrap.innerHTML =
-      '<span class="task-tag">⏳ ' + esc('Уақыт машинасы · ' + (allDone ? L3.length : doneN + 1) + '/' + L3.length) + '</span>' +
-      '<p class="task-question">' + (allDone ? 'Уақыт сызбасы толық құрылды.' : 'Карточканы тиісті тарихи кезеңге орналастырыңыз.') + '</p>';
+      '<span class="task-tag">⏳ ' + esc('Уақыт машинасы · ' + (doneN + 1) + '/' + L3.length) + '</span>' +
+      '<p class="task-question">Карточканы тиісті тарихи кезеңге орналастырыңыз.</p>';
 
     var board = document.createElement('div');
     board.className = 'dnd-board';
 
     var tray = document.createElement('div');
     tray.className = 'dnd-tray';
-    tray.innerHTML = '<p class="dnd-tray-title">' + (allDone ? 'Нәтиже' : 'Ағымдағы карточка') + '</p>';
+    tray.innerHTML = '<p class="dnd-tray-title">Ағымдағы карточка</p>';
     var trayItems = document.createElement('div');
     trayItems.className = 'dnd-tray-items';
     tray.appendChild(trayItems);
@@ -1693,36 +1696,27 @@
 
       /* бұрын орналастырылған карточкалар */
       L3.forEach(function (c) {
-        if (c.period === p.id && state.l3answers[c.id] && (!card || c.id !== card.id)) {
-          $('.dz-items', z).appendChild(buildL3Card(c, true));
+        if (c.period === p.id && state.l3answers[c.id] && c.id !== card.id) {
+          var placed = buildL3Card(c, true);
+          $('.dz-items', z).appendChild(placed);
         }
       });
       if (!$('.dz-items', z).children.length) {
         $('.dz-items', z).innerHTML = '<span class="dz-empty">Бос — карточканы осында апарыңыз</span>';
       }
 
-      if (!allDone) {
-        z.addEventListener('click', function () { tryPlace(p.id, z, 'tap'); });
-        z.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
-            e.preventDefault();
-            tryPlace(p.id, z, 'key');
-          }
-        });
-      }
+      z.addEventListener('click', function () { tryPlace(p.id, z, 'tap'); });
+      z.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          tryPlace(p.id, z, 'key');
+        }
+      });
     });
 
     board.appendChild(tray);
     board.appendChild(zones);
     wrap.appendChild(board);
-
-    if (allDone) {
-      trayItems.innerHTML = '<span class="dz-empty" style="color:#ecdcb9">✅ Барлық карточка өз кезеңіне орналастырылды.</span>';
-      wrap.appendChild(board);
-      host.appendChild(wrap);
-      window.setTimeout(function () { completeLevel(3); }, 950);
-      return;
-    }
 
     var help = document.createElement('p');
     help.className = 'dnd-help';
@@ -1750,12 +1744,10 @@
       markTaskAnswered('l3answers', card.id, ok ? 'ok' : 'bad');
       var host2 = $('#level-body');
       window.setTimeout(function () {
-        safeRender(function () {
-          if (!host2) { return; }
-          host2.innerHTML = '';
-          renderLevel3(host2);
-          checkLevelDone(3, 'l3answers');
-        });
+        if (!host2) { return; }
+        host2.innerHTML = '';
+        renderLevel3(host2);
+        checkLevelDone(3, 'l3answers');
       }, ok ? 780 : 900);
     }
 
@@ -1958,7 +1950,7 @@
      ========================================================================== */
   function renderLevel4(host) {
     var idx = clamp(countKeys(state.l4answers), 0, L4.length);
-    if (idx >= L4.length) { renderDonePanel(host, 4); completeLevel(4); return; }
+    if (idx >= L4.length) { completeLevel(4); return; }
     var t = L4[idx];
     setTaskCounter(idx + 1, L4.length);
 
@@ -1984,13 +1976,11 @@
     var analysisPenalized = false;
     var step = analyzed ? 3 : 1;   /* 1 = ДӘЛЕЛ, 2 = ТАЛДАУ, 3 = ҚОРЫТЫНДЫ */
 
-    /* Дәлелдер де әр ойында әртүрлі ретпен тұрады */
-    shuffle(t.evidence.map(function (_, i) { return i; })).forEach(function (orig) {
-      var ev = t.evidence[orig];
+    t.evidence.forEach(function (ev, i) {
       var chip = document.createElement('button');
       chip.type = 'button';
       chip.className = 'ev-chip';
-      chip.dataset.i = String(orig);
+      chip.dataset.i = String(i);
       chip.innerHTML = '<span class="ev-emoji" aria-hidden="true">' + esc(ev.emoji) + '</span><span>' + esc(ev.txt) + '</span>';
       evList.appendChild(chip);
     });
@@ -2046,18 +2036,15 @@
         attempts: 2,
         loseHeart: true,
         onResult: function (ok) {
-          if (ok) { addScore(5); }
           markTaskAnswered('l4answers', idx, ok ? 'ok' : 'bad');
           checkLevelDone(4, 'l4answers');
         },
         onNext: function () {
           if (!state.l4answers[idx]) { markTaskAnswered('l4answers', idx, 'bad'); }
-          safeRender(function () {
-            stepBody.innerHTML = '';
-            host.innerHTML = '';
-            renderLevel4(host);
-            checkLevelDone(4, 'l4answers');
-          });
+          stepBody.innerHTML = '';
+          host.innerHTML = '';
+          renderLevel4(host);
+          checkLevelDone(4, 'l4answers');
         }
       });
       /* сұрақ қайталанбас үшін MCQ ішіндегі мәтінді алып тастаймыз */
@@ -2113,7 +2100,7 @@
      ========================================================================== */
   function renderLevel5(host) {
     var idx = clamp(countKeys(state.l5answers), 0, L5.length);
-    if (idx >= L5.length) { renderDonePanel(host, 5); completeLevel(5); return; }
+    if (idx >= L5.length) { completeLevel(5); return; }
     var t = L5[idx];
     setTaskCounter(idx + 1, L5.length);
 
@@ -2136,11 +2123,9 @@
         onNext: function () {
           if (!state.l5answers[idx]) { markTaskAnswered('l5answers', idx, 'bad'); }
           Timer.hide();
-          safeRender(function () {
-            host.innerHTML = '';
-            renderLevel5(host);
-            checkLevelDone(5, 'l5answers');
-          });
+          host.innerHTML = '';
+          renderLevel5(host);
+          checkLevelDone(5, 'l5answers');
         }
       }));
       return;
@@ -2160,13 +2145,11 @@
       Timer.hide();
       window.setTimeout(function () {
         if (state.hearts <= 0 || state.gameOver) { return; }
-        safeRender(function () {
-          var h = $('#level-body');
-          if (!h) { return; }
-          h.innerHTML = '';
-          renderLevel5(h);
-          checkLevelDone(5, 'l5answers');
-        });
+        var h = $('#level-body');
+        if (!h) { return; }
+        h.innerHTML = '';
+        renderLevel5(h);
+        checkLevelDone(5, 'l5answers');
       }, 900);
     }
 
@@ -2452,8 +2435,7 @@
         node.classList.add('placed');
         node.classList.remove('selected');
         node.setAttribute('aria-pressed', 'false');
-        node.setAttribute('aria-disabled', 'true');
-        node.tabIndex = -1;
+        node.disabled = true;
         if (node.parentNode !== itemsBox) { itemsBox.appendChild(node); }
         zone.classList.add('flash-ok');
         window.setTimeout(function () { zone.classList.remove('flash-ok'); }, 600);
@@ -2821,14 +2803,13 @@
     state = defaultState();
     state.started = true;
     state.cells = buildCells();
-    state.l3order = shuffle(L3.map(function (c) { return c.id; }));
     save();
     updateHUD(false);
     updateStartButtons();
     if (!silentToast) { toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400); }
   }
 
-  function resetAll(silent) {
+  function resetAll() {
     Timer.hide();
     Confetti.stop();
     closeModal();
@@ -2837,7 +2818,7 @@
     updateHUD(false);
     updateStartButtons();
     showScreen('screen-start');
-    if (!silent) { toast('Барлық прогресс тазаланды. Жаңа экспедицияға дайын болыңыз!', '', '🔄', 2600); }
+    toast('Барлық прогресс тазаланды. Жаңа экспедицияға дайын болыңыз!', '', '🔄', 2600);
   }
 
   function updateStartButtons() {
@@ -2895,7 +2876,7 @@
             title: 'ЖАҢА ОЙЫН БАСТАУ?',
             body: '<p class="fb-text">Сақталған прогресс (ұпай, артефактілер, деңгейлер) толық өшіріледі және жаңа экспедиция басталады.</p>',
             actions: [
-              { label: '✅ ИӘ, ЖАҢА ОЙЫН', cls: 'btn-gold', onClick: function () { startNewGame(); openLevel(1); } },
+              { label: '✅ ИӘ, ЖАҢА ОЙЫН', cls: 'btn-gold', onClick: function () { startNewGame(); openLevel(1); toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400); } },
               { label: '← ЖОҚ, БАС МӘЗІР', cls: 'btn-outline' }
             ]
           });
@@ -2903,6 +2884,7 @@
         }
         startNewGame();
         openLevel(1);
+        toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400);
       });
     }
 
@@ -2969,9 +2951,9 @@
       'btn-certificate': function () { Sound.play('click'); showScreen('screen-certificate'); },
       'btn-final-museum': function () { Sound.play('click'); showScreen('screen-museum'); },
       'btn-final-timeline': function () { Sound.play('click'); showScreen('screen-timeline'); },
-      'btn-replay': function () { Sound.play('click'); resetAll(true); startNewGame(); openLevel(1); },
+      'btn-replay': function () { Sound.play('click'); resetAll(); startNewGame(); openLevel(1); },
       'btn-final-home': function () { Sound.play('click'); resetAll(); },
-      'btn-over-replay': function () { Sound.play('click'); resetAll(true); startNewGame(); openLevel(1); },
+      'btn-over-replay': function () { Sound.play('click'); resetAll(); startNewGame(); openLevel(1); },
       'btn-over-home': function () { Sound.play('click'); resetAll(); },
       'btn-cert-back': function () { Sound.play('click'); showScreen('screen-final'); }
     };
