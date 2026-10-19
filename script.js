@@ -822,7 +822,7 @@
     node.setAttribute('role', 'status');
     node.innerHTML = '<span class="toast-ico" aria-hidden="true">' + esc(icon || 'ℹ️') + '</span><span>' + esc(msg) + '</span>';
     toastWrap.appendChild(node);
-    while (toastWrap.children.length > 3) { toastWrap.removeChild(toastWrap.firstChild); }
+    while (toastWrap.children.length > 2) { toastWrap.removeChild(toastWrap.firstChild); }
     var life = ms || 2600;
     window.setTimeout(function () {
       node.classList.add('out');

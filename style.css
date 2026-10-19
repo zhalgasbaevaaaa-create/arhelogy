@@ -1063,9 +1063,9 @@ body:not(.has-nav) .toast-wrap{bottom:22px;}
   pointer-events:auto;width:100%;
   background:linear-gradient(180deg, rgba(43,29,17,.97), rgba(27,18,11,.97));
   border:1px solid rgba(242,199,108,.45);
-  border-radius:var(--r-md);padding:11px 14px;
+  border-radius:var(--r-md);padding:9px 12px;
   box-shadow:0 12px 28px rgba(0,0,0,.55);
-  color:var(--sand);font-size:14px;font-weight:700;
+  color:var(--sand);font-size:13px;font-weight:700;
   display:flex;align-items:center;gap:9px;
   animation:toastIn .35s cubic-bezier(.2,1.2,.35,1) both;
 }
@@ -1138,6 +1138,7 @@ body:not(.has-nav) .toast-wrap{bottom:22px;}
   .dig-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;}
   .stat{font-size:11.5px;}
   .nav-txt{font-size:9.5px;}
+  .toast{font-size:12px;padding:8px 10px;}
   .cert-results{grid-template-columns:1fr;}
 }
 
