@@ -3021,7 +3021,7 @@
     showScreen('screen-start');
 
     /* Service worker — офлайн жұмыс үшін (мүмкін болса) */
-    if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    if ('serviceWorker' in navigator && window.isSecureContext && location.protocol !== 'file:') {
       window.addEventListener('load', function () {
         try {
           navigator.serviceWorker.register('sw.js').catch(function () { /* офлайн режим міндетті емес */ });
