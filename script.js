@@ -1104,9 +1104,8 @@
       paint();
       if (left <= 5 && left > 0) { Sound.play('tick'); }
       if (left <= 0) {
-        var cb = onEnd;
         stop();
-        if (typeof cb === 'function') { cb(); }
+        if (typeof onEnd === 'function') { var f = onEnd; onEnd = null; f(); }
       }
     }
     function stop() {
@@ -1136,6 +1135,17 @@
   /* ==========================================================================
      7. ДЕҢГЕЙЛЕРДІ АШУ / АЯҚТАУ
      ========================================================================== */
+  var renderToken = 0;
+
+  /* Бұрынғы деңгейге тиесілі кешіктірілген әрекеттерді қауіпсіз орындау */
+  function laterForLevel(fn, ms) {
+    var token = renderToken;
+    window.setTimeout(function () {
+      if (token !== renderToken) { return; }
+      try { fn(); } catch (e) { if (window.console && console.warn) { console.warn(e); } }
+    }, ms);
+  }
+
   function levelCompleted(n) { return state.completedLevels.indexOf(n) >= 0; }
 
   function markTaskAnswered(bucket, key, value) {
@@ -1179,7 +1189,7 @@
     var need = TASKS_PER_LEVEL[n];
     var have = (n === 1) ? state.artifacts.length : countKeys(state[bucket]);
     if (have >= need && !levelCompleted(n)) {
-      window.setTimeout(function () { completeLevel(n); }, n === 1 ? 850 : 520);
+      laterForLevel(function () { completeLevel(n); }, n === 1 ? 850 : 520);
     }
   }
 
@@ -1194,7 +1204,6 @@
     closeModal();
     state.level = n;
     save();
-    updateHUD(false);
     showScreen('screen-game');
     renderLevel(n);
   }
@@ -1203,6 +1212,7 @@
     var meta = LEVELS[n];
     var body = $('#level-body');
     if (!meta || !body) { return; }
+    renderToken++;
     Timer.hide();
     $('#lvl-num').textContent = String(n);
     $('#lvl-title').textContent = meta.title;
@@ -1438,7 +1448,7 @@
         var found = $('#dig-found');
         if (found) { found.textContent = String(state.artifacts.length); }
         setTaskCounter(state.artifacts.length, ARTIFACTS.length);
-        window.setTimeout(function () {
+        laterForLevel(function () {
           if (state.artifacts.length >= ARTIFACTS.length) { completeLevel(1); }
         }, 800);
       } else {
@@ -1590,7 +1600,7 @@
       state.mistakes++;
       addScore(-2);
       Sound.play('bad');
-      if (wrong >= attempts || cfg.explainOnWrong) {
+      if (wrong >= attempts) {
         resolved = true;
         setDisabled(true);
         btns[cfg.correct].classList.add('correct');
@@ -1600,7 +1610,9 @@
         if (typeof cfg.onResult === 'function') { cfg.onResult(false); }
         nextButton();
       } else {
-        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.', cfg.hint || '');
+        /* Қате жаудан кейін міндетті түрде қысқа түсіндірме береміз */
+        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.',
+                 cfg.tip || cfg.hint || '');
         btns.forEach(function (bb) { if (!bb.classList.contains('wrong')) { bb.disabled = false; } });
       }
       save();
@@ -1633,8 +1645,6 @@
       options: t.options,
       correct: t.correct,
       tip: t.tip,
-      explain: t.tip,
-      explainOnWrong: true,
       attempts: 2,
       loseHeart: false,
       onNext: function () {
@@ -1748,7 +1758,7 @@
       Timer.hide();
       markTaskAnswered('l3answers', card.id, ok ? 'ok' : 'bad');
       var host2 = $('#level-body');
-      window.setTimeout(function () {
+      laterForLevel(function () {
         if (!host2) { return; }
         host2.innerHTML = '';
         renderLevel3(host2);
@@ -2033,12 +2043,12 @@
       var mcq = buildMCQ({
         tag: 'ҚОРЫТЫНДЫ',
         inline: true,
+        points: 5,
         question: t.q,
         options: t.options,
         correct: t.correct,
         explain: t.explain,
         tip: t.keyWhy,
-        points: 5,
         attempts: 2,
         loseHeart: true,
         onResult: function (ok) {
@@ -2119,8 +2129,8 @@
         correct: t.correct,
         explain: t.explain,
         tip: t.explain,
-        points: 10,
         attempts: 2,
+        points: 10,
         loseHeart: true,
         onResult: function (ok) {
           markTaskAnswered('l5answers', idx, ok ? 'ok' : 'bad');
@@ -2149,7 +2159,7 @@
 
     function next() {
       Timer.hide();
-      window.setTimeout(function () {
+      laterForLevel(function () {
         if (state.hearts <= 0 || state.gameOver) { return; }
         var h = $('#level-body');
         if (!h) { return; }
@@ -2441,7 +2451,10 @@
         node.classList.add('placed');
         node.classList.remove('selected');
         node.setAttribute('aria-pressed', 'false');
-        node.disabled = true;
+        /* disabled емес: басылған оқиға себетке «көтерілуі» керек —
+           сондықтан алғашқы жүктеу рұқсат етіледі, таңдау бұғатталады */
+        node.setAttribute('aria-disabled', 'true');
+        node.setAttribute('tabindex', '-1');
         if (node.parentNode !== itemsBox) { itemsBox.appendChild(node); }
         zone.classList.add('flash-ok');
         window.setTimeout(function () { zone.classList.remove('flash-ok'); }, 600);
@@ -2849,8 +2862,8 @@
     if (state.finished) { showFinal(); return; }
     if (state.hearts <= 0) { gameOver(); return; }
     showScreen(state.level > 0 ? 'screen-game' : 'screen-expedition');
-    if (state.level > 0) { updateHUD(false); renderLevel(state.level); }
-    else { openLevel(state.unlockedLevel); }
+    if (state.level > 0) { renderLevel(state.level); }
+    else { state.level = 1; save(); openLevel(state.unlockedLevel); }
     toast('Экспедиция жалғасуда: LEVEL ' + Math.max(1, state.level), 'good', '▶', 2000);
   }
 
@@ -2882,7 +2895,7 @@
             title: 'ЖАҢА ОЙЫН БАСТАУ?',
             body: '<p class="fb-text">Сақталған прогресс (ұпай, артефактілер, деңгейлер) толық өшіріледі және жаңа экспедиция басталады.</p>',
             actions: [
-              { label: '✅ ИӘ, ЖАҢА ОЙЫН', cls: 'btn-gold', onClick: function () { startNewGame(); openLevel(1); toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400); } },
+              { label: '✅ ИӘ, ЖАҢА ОЙЫН', cls: 'btn-gold', onClick: function () { startNewGame(); openLevel(1); } },
               { label: '← ЖОҚ, БАС МӘЗІР', cls: 'btn-outline' }
             ]
           });

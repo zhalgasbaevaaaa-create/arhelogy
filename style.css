@@ -407,9 +407,8 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 
 .dig-grid{
   position:relative;z-index:1;
-  display:grid;gap:8px;
+  display:grid;gap:7px;
   grid-template-columns:repeat(5, minmax(0, 1fr));
-  gap:7px;
 }
 .cell{
   position:relative;aspect-ratio:1;
@@ -636,7 +635,7 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 .dz-name{font-family:var(--f-head);font-weight:700;font-size:16px;color:var(--ink);letter-spacing:.04em;}
 .dz-date{font-size:11.5px;color:var(--ink-soft);font-weight:700;}
 .dz-items{display:flex;flex-wrap:wrap;gap:7px;min-height:34px;}
-.dz-items .dcard{min-height:44px;font-size:13px;padding:8px 10px;pointer-events:none;}
+.dz-items .dcard{min-height:44px;font-size:13px;padding:8px 10px;}
 .dz-empty{font-size:12px;color:rgba(91,70,50,.7);font-style:italic;padding:6px 2px;}
 
 .dnd-help{
@@ -754,7 +753,7 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
   margin:0 0 8px;display:flex;align-items:center;gap:7px;
 }
 .bin-items{display:flex;flex-wrap:wrap;gap:7px;min-height:36px;}
-.bin-items .pool-card{cursor:default;padding:8px 11px;font-size:13px;min-height:42px;pointer-events:none;}
+.bin-items .pool-card{cursor:default;padding:8px 11px;font-size:13px;min-height:42px;}
 
 /* --------------------------------------------------------------------------
    ЭКСПЕДИЦИЯ КАРТАСЫ
@@ -1035,8 +1034,7 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
   font-size:clamp(1.15rem,5vw,1.5rem);margin:0 0 10px;color:var(--ink);
 }
 .modal-body{text-align:left;color:var(--ink);}
-.modal-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px;}
-.modal-actions .btn{flex:1 1 190px;}
+.modal-actions{display:grid;gap:9px;margin-top:16px;}
 
 .info-grid{display:grid;gap:8px;}
 .info-row{
@@ -1060,12 +1058,12 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 }
 body:not(.has-nav) .toast-wrap{bottom:22px;}
 .toast{
-  pointer-events:auto;width:100%;
+  pointer-events:auto;width:100%;font-size:13.5px;
   background:linear-gradient(180deg, rgba(43,29,17,.97), rgba(27,18,11,.97));
   border:1px solid rgba(242,199,108,.45);
-  border-radius:var(--r-md);padding:9px 12px;
+  border-radius:var(--r-md);padding:11px 14px;
   box-shadow:0 12px 28px rgba(0,0,0,.55);
-  color:var(--sand);font-size:13px;font-weight:700;
+  color:var(--sand);font-size:14px;font-weight:700;
   display:flex;align-items:center;gap:9px;
   animation:toastIn .35s cubic-bezier(.2,1.2,.35,1) both;
 }
@@ -1113,7 +1111,8 @@ body:not(.has-nav) .toast-wrap{bottom:22px;}
   .levels-list{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));}
   .final-actions{grid-template-columns:repeat(2,minmax(0,1fr));}
   .final-actions .btn:first-child{grid-column:1 / -1;}
-  .modal-actions .btn{flex:1 1 40%;}
+  .modal-actions{grid-template-columns:1fr 1fr;}
+  .modal-actions .btn:first-child{grid-column:1 / -1;}
   .nav{padding:0 12px;}
   .nav-btn{flex-direction:row;gap:8px;font-size:13px;justify-content:center;}
   :root{--nav-h:58px;}
@@ -1128,7 +1127,6 @@ body:not(.has-nav) .toast-wrap{bottom:22px;}
   .museum-grid{grid-template-columns:repeat(auto-fill,minmax(168px,1fr));}
   .cert-results{grid-template-columns:repeat(4,minmax(0,1fr));}
   .task-question{font-size:1.3rem;}
-  .dig-grid{grid-template-columns:repeat(10,minmax(0,1fr));gap:8px;}
   .dnd-board{grid-template-columns:1fr;}
 }
 
@@ -1138,7 +1136,6 @@ body:not(.has-nav) .toast-wrap{bottom:22px;}
   .dig-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;}
   .stat{font-size:11.5px;}
   .nav-txt{font-size:9.5px;}
-  .toast{font-size:12px;padding:8px 10px;}
   .cert-results{grid-template-columns:1fr;}
 }
 
