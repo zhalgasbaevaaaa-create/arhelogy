@@ -1104,8 +1104,9 @@
       paint();
       if (left <= 5 && left > 0) { Sound.play('tick'); }
       if (left <= 0) {
+        var cb = onEnd;
         stop();
-        if (typeof onEnd === 'function') { var f = onEnd; onEnd = null; f(); }
+        if (typeof cb === 'function') { cb(); }
       }
     }
     function stop() {
@@ -1193,6 +1194,7 @@
     closeModal();
     state.level = n;
     save();
+    updateHUD(false);
     showScreen('screen-game');
     renderLevel(n);
   }
@@ -1588,7 +1590,7 @@
       state.mistakes++;
       addScore(-2);
       Sound.play('bad');
-      if (wrong >= attempts) {
+      if (wrong >= attempts || cfg.explainOnWrong) {
         resolved = true;
         setDisabled(true);
         btns[cfg.correct].classList.add('correct');
@@ -1631,6 +1633,8 @@
       options: t.options,
       correct: t.correct,
       tip: t.tip,
+      explain: t.tip,
+      explainOnWrong: true,
       attempts: 2,
       loseHeart: false,
       onNext: function () {
@@ -2845,8 +2849,8 @@
     if (state.finished) { showFinal(); return; }
     if (state.hearts <= 0) { gameOver(); return; }
     showScreen(state.level > 0 ? 'screen-game' : 'screen-expedition');
-    if (state.level > 0) { renderLevel(state.level); }
-    else { state.level = 1; save(); openLevel(state.unlockedLevel); }
+    if (state.level > 0) { updateHUD(false); renderLevel(state.level); }
+    else { openLevel(state.unlockedLevel); }
     toast('Экспедиция жалғасуда: LEVEL ' + Math.max(1, state.level), 'good', '▶', 2000);
   }
 
@@ -2886,7 +2890,6 @@
         }
         startNewGame();
         openLevel(1);
-        toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400);
       });
     }
 
