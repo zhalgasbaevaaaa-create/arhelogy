@@ -822,7 +822,7 @@
     node.setAttribute('role', 'status');
     node.innerHTML = '<span class="toast-ico" aria-hidden="true">' + esc(icon || 'ℹ️') + '</span><span>' + esc(msg) + '</span>';
     toastWrap.appendChild(node);
-    while (toastWrap.children.length > 2) { toastWrap.removeChild(toastWrap.firstChild); }
+    while (toastWrap.children.length > 3) { toastWrap.removeChild(toastWrap.firstChild); }
     var life = ms || 2600;
     window.setTimeout(function () {
       node.classList.add('out');
@@ -1135,17 +1135,6 @@
   /* ==========================================================================
      7. ДЕҢГЕЙЛЕРДІ АШУ / АЯҚТАУ
      ========================================================================== */
-  var renderToken = 0;
-
-  /* Бұрынғы деңгейге тиесілі кешіктірілген әрекеттерді қауіпсіз орындау */
-  function laterForLevel(fn, ms) {
-    var token = renderToken;
-    window.setTimeout(function () {
-      if (token !== renderToken) { return; }
-      try { fn(); } catch (e) { if (window.console && console.warn) { console.warn(e); } }
-    }, ms);
-  }
-
   function levelCompleted(n) { return state.completedLevels.indexOf(n) >= 0; }
 
   function markTaskAnswered(bucket, key, value) {
@@ -1189,7 +1178,7 @@
     var need = TASKS_PER_LEVEL[n];
     var have = (n === 1) ? state.artifacts.length : countKeys(state[bucket]);
     if (have >= need && !levelCompleted(n)) {
-      laterForLevel(function () { completeLevel(n); }, n === 1 ? 850 : 520);
+      window.setTimeout(function () { completeLevel(n); }, n === 1 ? 850 : 520);
     }
   }
 
@@ -1212,7 +1201,6 @@
     var meta = LEVELS[n];
     var body = $('#level-body');
     if (!meta || !body) { return; }
-    renderToken++;
     Timer.hide();
     $('#lvl-num').textContent = String(n);
     $('#lvl-title').textContent = meta.title;
@@ -1448,7 +1436,7 @@
         var found = $('#dig-found');
         if (found) { found.textContent = String(state.artifacts.length); }
         setTaskCounter(state.artifacts.length, ARTIFACTS.length);
-        laterForLevel(function () {
+        window.setTimeout(function () {
           if (state.artifacts.length >= ARTIFACTS.length) { completeLevel(1); }
         }, 800);
       } else {
@@ -1587,7 +1575,6 @@
         resolved = true;
         setDisabled(true);
         b.classList.add('correct');
-        addScore(typeof cfg.points === 'number' ? cfg.points : 5);
         feedback('ok', '✅ ДҰРЫС!', 'Жауабыңыз қабылданды.', wrong > 0 ? (cfg.tip || cfg.explain || '') : (cfg.tip || ''));
         Sound.play('good');
         if (typeof cfg.onResult === 'function') { cfg.onResult(true); }
@@ -1610,9 +1597,7 @@
         if (typeof cfg.onResult === 'function') { cfg.onResult(false); }
         nextButton();
       } else {
-        /* Қате жаудан кейін міндетті түрде қысқа түсіндірме береміз */
-        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.',
-                 cfg.tip || cfg.hint || '');
+        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.', cfg.hint || '');
         btns.forEach(function (bb) { if (!bb.classList.contains('wrong')) { bb.disabled = false; } });
       }
       save();
@@ -1758,7 +1743,7 @@
       Timer.hide();
       markTaskAnswered('l3answers', card.id, ok ? 'ok' : 'bad');
       var host2 = $('#level-body');
-      laterForLevel(function () {
+      window.setTimeout(function () {
         if (!host2) { return; }
         host2.innerHTML = '';
         renderLevel3(host2);
@@ -2043,7 +2028,6 @@
       var mcq = buildMCQ({
         tag: 'ҚОРЫТЫНДЫ',
         inline: true,
-        points: 5,
         question: t.q,
         options: t.options,
         correct: t.correct,
@@ -2130,9 +2114,9 @@
         explain: t.explain,
         tip: t.explain,
         attempts: 2,
-        points: 10,
         loseHeart: true,
         onResult: function (ok) {
+          if (ok) { addScore(10); }
           markTaskAnswered('l5answers', idx, ok ? 'ok' : 'bad');
           checkLevelDone(5, 'l5answers');
         },
@@ -2159,7 +2143,7 @@
 
     function next() {
       Timer.hide();
-      laterForLevel(function () {
+      window.setTimeout(function () {
         if (state.hearts <= 0 || state.gameOver) { return; }
         var h = $('#level-body');
         if (!h) { return; }
@@ -2451,10 +2435,7 @@
         node.classList.add('placed');
         node.classList.remove('selected');
         node.setAttribute('aria-pressed', 'false');
-        /* disabled емес: басылған оқиға себетке «көтерілуі» керек —
-           сондықтан алғашқы жүктеу рұқсат етіледі, таңдау бұғатталады */
-        node.setAttribute('aria-disabled', 'true');
-        node.setAttribute('tabindex', '-1');
+        node.disabled = true;
         if (node.parentNode !== itemsBox) { itemsBox.appendChild(node); }
         zone.classList.add('flash-ok');
         window.setTimeout(function () { zone.classList.remove('flash-ok'); }, 600);
@@ -2895,7 +2876,7 @@
             title: 'ЖАҢА ОЙЫН БАСТАУ?',
             body: '<p class="fb-text">Сақталған прогресс (ұпай, артефактілер, деңгейлер) толық өшіріледі және жаңа экспедиция басталады.</p>',
             actions: [
-              { label: '✅ ИӘ, ЖАҢА ОЙЫН', cls: 'btn-gold', onClick: function () { startNewGame(); openLevel(1); } },
+              { label: '✅ ИӘ, ЖАҢА ОЙЫН', cls: 'btn-gold', onClick: function () { startNewGame(); openLevel(1); toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400); } },
               { label: '← ЖОҚ, БАС МӘЗІР', cls: 'btn-outline' }
             ]
           });
@@ -2903,6 +2884,7 @@
         }
         startNewGame();
         openLevel(1);
+        toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400);
       });
     }
 
@@ -3021,7 +3003,7 @@
     showScreen('screen-start');
 
     /* Service worker — офлайн жұмыс үшін (мүмкін болса) */
-    if ('serviceWorker' in navigator && window.isSecureContext && location.protocol !== 'file:') {
+    if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
       window.addEventListener('load', function () {
         try {
           navigator.serviceWorker.register('sw.js').catch(function () { /* офлайн режим міндетті емес */ });
