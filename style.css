@@ -407,8 +407,8 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 
 .dig-grid{
   position:relative;z-index:1;
-  display:grid;gap:7px;
-  grid-template-columns:repeat(5, minmax(0, 1fr));
+  display:grid;gap:8px;
+  grid-template-columns:repeat(auto-fit, minmax(78px, 1fr));
 }
 .cell{
   position:relative;aspect-ratio:1;
@@ -1058,7 +1058,7 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 }
 body:not(.has-nav) .toast-wrap{bottom:22px;}
 .toast{
-  pointer-events:auto;width:100%;font-size:13.5px;
+  pointer-events:auto;width:100%;
   background:linear-gradient(180deg, rgba(43,29,17,.97), rgba(27,18,11,.97));
   border:1px solid rgba(242,199,108,.45);
   border-radius:var(--r-md);padding:11px 14px;
@@ -1103,7 +1103,7 @@ body:not(.has-nav) .toast-wrap{bottom:22px;}
   main{padding:18px 18px 34px;}
   .panel{padding:20px;}
   .hud-inner{padding:10px 18px 12px;}
-  .dig-grid{grid-template-columns:repeat(6,minmax(0,1fr));}
+  .dig-grid{grid-template-columns:repeat(6,1fr);}
   .dnd-zones{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));}
   .bins{grid-template-columns:repeat(2,minmax(0,1fr));}
   .match-wrap{grid-template-columns:1fr 1fr;}
@@ -1121,11 +1121,6 @@ body:not(.has-nav) .toast-wrap{bottom:22px;}
 }
 
 @media (min-width:900px){
-  /* қазба алаңы бір экранға сыйсын */
-  .dig-field{max-width:740px;margin-left:auto;margin-right:auto;}
-  .cell{aspect-ratio:1.55;}
-  .dig-tools{max-width:740px;margin-left:auto;margin-right:auto;}
-  .dig-legend{max-width:740px;margin-left:auto;margin-right:auto;}
   .stat{font-size:14px;}
   .progress-title{font-size:11.5px;}
   .hud-stats{gap:8px 22px;}
@@ -1138,7 +1133,7 @@ body:not(.has-nav) .toast-wrap{bottom:22px;}
 @media (max-width:359px){
   :root{--nav-h:60px;}
   .btn{padding:12px 14px;font-size:14.5px;}
-  .dig-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;}
+  .dig-grid{grid-template-columns:repeat(auto-fit,minmax(66px,1fr));gap:6px;}
   .stat{font-size:11.5px;}
   .nav-txt{font-size:9.5px;}
   .cert-results{grid-template-columns:1fr;}
