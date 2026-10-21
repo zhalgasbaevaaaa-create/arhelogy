@@ -292,6 +292,22 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 }
 .btn-dark:hover{border-color:var(--gold);}
 
+
+/* --- Ашық панель ішіндегі батырмалар: жоғары контраст --- */
+.panel .btn-outline{
+  background:rgba(122,87,51,.10);
+  border:2px solid rgba(122,87,51,.55);
+  color:#4b3320;
+}
+.panel .btn-outline:hover{background:rgba(122,87,51,.20);color:#2a1d13;}
+.panel .btn-ghost{
+  background:rgba(122,87,51,.12);
+  border:1px solid rgba(122,87,51,.40);
+  color:#4b3320;
+}
+.panel .btn-ghost:hover{background:rgba(122,87,51,.22);color:#2a1d13;}
+.panel .btn-dark{color:#fbf4e6;}
+
 /* --------------------------------------------------------------------------
    БАСТЫ ЭКРАН (HERO)
    -------------------------------------------------------------------------- */
