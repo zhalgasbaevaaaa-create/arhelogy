@@ -1575,7 +1575,8 @@
         resolved = true;
         setDisabled(true);
         b.classList.add('correct');
-        feedback('ok', '✅ ДҰРЫС!', 'Жауабыңыз қабылданды.', wrong > 0 ? (cfg.tip || cfg.explain || '') : (cfg.tip || ''));
+        addScore(cfg.points || 5);
+        feedback('ok', '✅ ДҰРЫС! +' + (cfg.points || 5) + ' ұпай', 'Жауабыңыз қабылданды.', wrong > 0 ? (cfg.tip || cfg.explain || '') : (cfg.tip || ''));
         Sound.play('good');
         if (typeof cfg.onResult === 'function') { cfg.onResult(true); }
         nextButton();
@@ -2115,8 +2116,8 @@
         tip: t.explain,
         attempts: 2,
         loseHeart: true,
+        points: 10,
         onResult: function (ok) {
-          if (ok) { addScore(10); }
           markTaskAnswered('l5answers', idx, ok ? 'ok' : 'bad');
           checkLevelDone(5, 'l5answers');
         },
