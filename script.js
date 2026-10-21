@@ -732,6 +732,7 @@
       countKeys(state.l4answers) + countKeys(state.l5answers);
   }
   function progressPct() {
+    if (state.finished) { return 100; }
     return Math.round(doneCount() / TOTAL_TASKS * 100);
   }
   function finalScore() {
@@ -822,7 +823,8 @@
     node.setAttribute('role', 'status');
     node.innerHTML = '<span class="toast-ico" aria-hidden="true">' + esc(icon || 'ℹ️') + '</span><span>' + esc(msg) + '</span>';
     toastWrap.appendChild(node);
-    while (toastWrap.children.length > 3) { toastWrap.removeChild(toastWrap.firstChild); }
+    var maxToasts = (window.innerWidth < 600) ? 2 : 3;
+    while (toastWrap.children.length > maxToasts) { toastWrap.removeChild(toastWrap.firstChild); }
     var life = ms || 2600;
     window.setTimeout(function () {
       node.classList.add('out');
@@ -1597,7 +1599,7 @@
         if (typeof cfg.onResult === 'function') { cfg.onResult(false); }
         nextButton();
       } else {
-        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.', cfg.hint || cfg.tip || cfg.explain || '');
+        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.', cfg.hint || '');
         btns.forEach(function (bb) { if (!bb.classList.contains('wrong')) { bb.disabled = false; } });
       }
       save();
