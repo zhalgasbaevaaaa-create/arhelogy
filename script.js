@@ -1597,7 +1597,7 @@
         if (typeof cfg.onResult === 'function') { cfg.onResult(false); }
         nextButton();
       } else {
-        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.', cfg.hint || '');
+        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.', cfg.hint || cfg.tip || cfg.explain || '');
         btns.forEach(function (bb) { if (!bb.classList.contains('wrong')) { bb.disabled = false; } });
       }
       save();
