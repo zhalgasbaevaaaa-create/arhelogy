@@ -1113,8 +1113,9 @@
       paint();
       if (left <= 5 && left > 0) { Sound.play('tick'); }
       if (left <= 0) {
+        var f = onEnd;      /* stop() onEnd-ті тазалайды — сондықтан алдын ала сақтаймыз */
         stop();
-        if (typeof onEnd === 'function') { var f = onEnd; onEnd = null; f(); }
+        if (typeof f === 'function') { f(); }
       }
     }
     function stop() {
@@ -1665,6 +1666,7 @@
         checkLevelDone(2, 'l2answers');
       },
       onResult: function (ok) {
+        if (ok) { addScore(5); }
         markTaskAnswered('l2answers', idx, ok ? 'ok' : 'bad');
         checkLevelDone(2, 'l2answers');
       }
@@ -2062,6 +2064,7 @@
         attempts: 2,
         loseHeart: true,
         onResult: function (ok) {
+          if (ok) { addScore(5); }
           markTaskAnswered('l4answers', idx, ok ? 'ok' : 'bad');
           checkLevelDone(4, 'l4answers');
         },

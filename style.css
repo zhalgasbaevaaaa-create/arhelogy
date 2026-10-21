@@ -645,7 +645,7 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 .dz-name{font-family:var(--f-head);font-weight:700;font-size:16px;color:var(--ink);letter-spacing:.04em;}
 .dz-date{font-size:11.5px;color:var(--ink-soft);font-weight:700;}
 .dz-items{display:flex;flex-wrap:wrap;gap:7px;min-height:34px;}
-.dz-items .dcard{min-height:44px;font-size:13px;padding:8px 10px;}
+.dz-items .dcard{min-height:44px;font-size:13px;padding:8px 10px;pointer-events:none;}
 .dz-empty{font-size:12px;color:rgba(91,70,50,.7);font-style:italic;padding:6px 2px;}
 
 .dnd-help{
@@ -729,7 +729,7 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 .pool-card.wrongflash{animation:cellShake .4s ease;border-color:var(--bad);}
 .pool-card.dnd-card{touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;}
 .pool-card.dnd-card.dragging{opacity:.4;}
-.pool-card.placed{cursor:default;opacity:1;background:var(--ok-bg);border-color:var(--ok);}
+.pool-card.placed{cursor:default;opacity:1;background:var(--ok-bg);border-color:var(--ok);pointer-events:none;}
 
 .match-wrap{display:grid;gap:10px;grid-template-columns:1fr;}
 .match-col-title{
@@ -763,7 +763,7 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
   margin:0 0 8px;display:flex;align-items:center;gap:7px;
 }
 .bin-items{display:flex;flex-wrap:wrap;gap:7px;min-height:36px;}
-.bin-items .pool-card{cursor:default;padding:8px 11px;font-size:13px;min-height:42px;}
+.bin-items .pool-card{cursor:default;padding:8px 11px;font-size:13px;min-height:42px;pointer-events:none;}
 
 /* --------------------------------------------------------------------------
    ЭКСПЕДИЦИЯ КАРТАСЫ
