@@ -176,8 +176,8 @@ button{font:inherit;color:inherit;}
 .hud-tools{display:flex;gap:8px;margin-left:auto;}
 .icon-btn{
   display:inline-flex;align-items:center;gap:5px;
-  background:rgba(242,199,108,.12);
-  border:1px solid rgba(242,199,108,.32);
+  background:rgba(242,199,108,.18);
+  border:1px solid rgba(242,199,108,.45);
   color:var(--sand);
   padding:6px 10px;border-radius:999px;cursor:pointer;
   font-size:12px;font-weight:700;
@@ -1115,10 +1115,14 @@ body:not(.has-nav) .toast-wrap{top:16px;bottom:auto;}
    ШОЛУ РЕЖИМІ (аяқталған деңгей)
    -------------------------------------------------------------------------- */
 .review-note{
-  background:rgba(217,164,65,.16);border-left:4px solid var(--bronze);
-  border-radius:var(--r-sm);padding:10px 13px;margin-bottom:14px;
+  background:linear-gradient(180deg,#fdf7ea,#f2e2c1);
+  border:1px solid rgba(122,87,51,.4);border-left:5px solid var(--bronze);
+  border-radius:var(--r-md);padding:12px 14px;margin-bottom:14px;
   font-size:14px;color:var(--ink);
+  box-shadow:var(--shadow-panel);
 }
+.review-note b{color:#3f5f24;}
+.review-note::before{display:none;}
 .review-item{
   background:rgba(122,87,51,.07);border:1px solid rgba(122,87,51,.2);
   border-radius:var(--r-md);padding:11px 13px;margin-bottom:10px;
