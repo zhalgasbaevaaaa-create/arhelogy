@@ -147,10 +147,19 @@ button{font:inherit;color:inherit;}
   backdrop-filter:blur(6px);
   -webkit-backdrop-filter:blur(6px);
 }
-.hud-inner{max-width:1080px;margin:0 auto;padding:8px 12px 10px;display:flex;flex-direction:column;gap:8px;}
+.hud-inner{
+  max-width:1080px;margin:0 auto;padding:8px 12px 10px;
+  display:grid;grid-template-columns:1fr auto;gap:6px 8px;align-items:start;
+}
+.hud-stats{grid-column:1;grid-row:1;}
+.hud-tools{grid-column:2;grid-row:1;margin-left:0;}
+.hud-progress{grid-column:1 / -1;grid-row:2;}
+@media (max-width:599px){
+  .icon-btn-txt{display:none;}
+  .icon-btn{padding:6px 9px;}
+}
 
-.hud-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;}
-.hud-stats{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;flex:1 1 auto;}
+.hud-stats{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;}
 .stat{display:flex;align-items:center;gap:5px;font-size:13px;letter-spacing:.02em;}
 .stat-ico{font-size:15px;line-height:1;}
 .stat-lab{color:var(--sand-2);font-weight:600;white-space:nowrap;}
@@ -283,20 +292,6 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 }
 .btn-dark:hover{border-color:var(--gold);}
 
-/* Ашық панель ішіндегі батырмалар — жоғары контраст */
-.panel .btn-outline{
-  background:rgba(122,87,51,.10);
-  border:2px solid rgba(122,87,51,.55);
-  color:var(--brown-dark);
-}
-.panel .btn-outline:hover{background:rgba(122,87,51,.2);color:var(--ink);border-color:var(--brown);}
-.panel .btn-ghost{
-  background:rgba(122,87,51,.08);
-  border:1px solid rgba(122,87,51,.35);
-  color:var(--ink-soft);
-}
-.panel .btn-ghost:hover{background:rgba(122,87,51,.18);color:var(--ink);}
-
 /* --------------------------------------------------------------------------
    БАСТЫ ЭКРАН (HERO)
    -------------------------------------------------------------------------- */
@@ -422,8 +417,8 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 
 .dig-grid{
   position:relative;z-index:1;
-  display:grid;gap:8px;
-  grid-template-columns:repeat(auto-fit, minmax(78px, 1fr));
+  display:grid;gap:7px;
+  grid-template-columns:repeat(5, minmax(0, 1fr));
 }
 .cell{
   position:relative;aspect-ratio:1;
@@ -650,7 +645,7 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 .dz-name{font-family:var(--f-head);font-weight:700;font-size:16px;color:var(--ink);letter-spacing:.04em;}
 .dz-date{font-size:11.5px;color:var(--ink-soft);font-weight:700;}
 .dz-items{display:flex;flex-wrap:wrap;gap:7px;min-height:34px;}
-.dz-items .dcard{min-height:44px;font-size:13px;padding:8px 10px;pointer-events:none;}
+.dz-items .dcard{min-height:44px;font-size:13px;padding:8px 10px;}
 .dz-empty{font-size:12px;color:rgba(91,70,50,.7);font-style:italic;padding:6px 2px;}
 
 .dnd-help{
@@ -734,7 +729,7 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 .pool-card.wrongflash{animation:cellShake .4s ease;border-color:var(--bad);}
 .pool-card.dnd-card{touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;}
 .pool-card.dnd-card.dragging{opacity:.4;}
-.pool-card.placed{cursor:default;opacity:1;background:var(--ok-bg);border-color:var(--ok);pointer-events:none;}
+.pool-card.placed{cursor:default;opacity:1;background:var(--ok-bg);border-color:var(--ok);}
 
 .match-wrap{display:grid;gap:10px;grid-template-columns:1fr;}
 .match-col-title{
@@ -768,7 +763,7 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
   margin:0 0 8px;display:flex;align-items:center;gap:7px;
 }
 .bin-items{display:flex;flex-wrap:wrap;gap:7px;min-height:36px;}
-.bin-items .pool-card{cursor:default;padding:8px 11px;font-size:13px;min-height:42px;pointer-events:none;}
+.bin-items .pool-card{cursor:default;padding:8px 11px;font-size:13px;min-height:42px;}
 
 /* --------------------------------------------------------------------------
    ЭКСПЕДИЦИЯ КАРТАСЫ
@@ -1067,13 +1062,18 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
    -------------------------------------------------------------------------- */
 .toast-wrap{
   position:fixed;left:50%;transform:translateX(-50%);
-  bottom:calc(var(--nav-h) + env(safe-area-inset-bottom,0px) + 14px);
+  top:calc(var(--hud-h, 120px) + 10px);
+  bottom:auto;
   z-index:120;display:flex;flex-direction:column;gap:8px;align-items:center;
   width:min(94vw,460px);pointer-events:none;
 }
-body:not(.has-nav) .toast-wrap{bottom:22px;}
+body:not(.has-nav) .toast-wrap{top:16px;bottom:auto;}
+@media (max-width:599px){
+  .toast-wrap{top:calc(var(--hud-h, 132px) + 8px);width:min(94vw,420px);}
+  .toast{font-size:13px;padding:9px 12px;}
+}
 .toast{
-  pointer-events:auto;width:100%;
+  pointer-events:none;width:100%;font-size:13.5px;
   background:linear-gradient(180deg, rgba(43,29,17,.97), rgba(27,18,11,.97));
   border:1px solid rgba(242,199,108,.45);
   border-radius:var(--r-md);padding:11px 14px;
@@ -1118,7 +1118,7 @@ body:not(.has-nav) .toast-wrap{bottom:22px;}
   main{padding:18px 18px 34px;}
   .panel{padding:20px;}
   .hud-inner{padding:10px 18px 12px;}
-  .dig-grid{grid-template-columns:repeat(6,1fr);}
+  .dig-grid{grid-template-columns:repeat(6,minmax(0,1fr));}
   .dnd-zones{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));}
   .bins{grid-template-columns:repeat(2,minmax(0,1fr));}
   .match-wrap{grid-template-columns:1fr 1fr;}
@@ -1136,6 +1136,11 @@ body:not(.has-nav) .toast-wrap{bottom:22px;}
 }
 
 @media (min-width:900px){
+  /* қазба алаңы бір экранға сыйсын */
+  .dig-field{max-width:740px;margin-left:auto;margin-right:auto;}
+  .cell{aspect-ratio:1.55;}
+  .dig-tools{max-width:740px;margin-left:auto;margin-right:auto;}
+  .dig-legend{max-width:740px;margin-left:auto;margin-right:auto;}
   .stat{font-size:14px;}
   .progress-title{font-size:11.5px;}
   .hud-stats{gap:8px 22px;}
@@ -1145,17 +1150,10 @@ body:not(.has-nav) .toast-wrap{bottom:22px;}
   .dnd-board{grid-template-columns:1fr;}
 }
 
-@media (max-width:430px){
-  .icon-btn-txt{display:none;}
-  .icon-btn{padding:7px 11px;min-height:38px;min-width:42px;justify-content:center;}
-  .hud-inner{padding:7px 10px 9px;gap:6px;}
-  .stat{font-size:12.5px;}
-}
-
 @media (max-width:359px){
   :root{--nav-h:60px;}
   .btn{padding:12px 14px;font-size:14.5px;}
-  .dig-grid{grid-template-columns:repeat(auto-fit,minmax(66px,1fr));gap:6px;}
+  .dig-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;}
   .stat{font-size:11.5px;}
   .nav-txt{font-size:9.5px;}
   .cert-results{grid-template-columns:1fr;}
