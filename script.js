@@ -1666,8 +1666,7 @@
         checkLevelDone(2, 'l2answers');
       },
       onResult: function (ok) {
-        if (ok) { addScore(5); }
-        markTaskAnswered('l2answers', idx, ok ? 'ok' : 'bad');
+                markTaskAnswered('l2answers', idx, ok ? 'ok' : 'bad');
         checkLevelDone(2, 'l2answers');
       }
     }));
@@ -2064,8 +2063,7 @@
         attempts: 2,
         loseHeart: true,
         onResult: function (ok) {
-          if (ok) { addScore(5); }
-          markTaskAnswered('l4answers', idx, ok ? 'ok' : 'bad');
+                    markTaskAnswered('l4answers', idx, ok ? 'ok' : 'bad');
           checkLevelDone(4, 'l4answers');
         },
         onNext: function () {
