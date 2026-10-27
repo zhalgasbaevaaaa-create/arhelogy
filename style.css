@@ -70,6 +70,11 @@ button{font:inherit;color:inherit;}
 }
 .skip-link:focus{top:0;}
 
+button,.opt,.ev-chip,.dcard,.pool-card,.match-item,.dropzone,.bin,.mcard,.time-node,.level-card{
+  scroll-margin-bottom:calc(var(--nav-h) + 28px);
+  scroll-margin-top:120px;
+}
+
 :focus-visible{
   outline:3px solid var(--gold-lt);
   outline-offset:3px;
@@ -409,6 +414,7 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
   position:relative;z-index:1;
   display:grid;gap:8px;
   grid-template-columns:repeat(auto-fit, minmax(78px, 1fr));
+  max-width:720px;margin:0 auto;
 }
 .cell{
   position:relative;aspect-ratio:1;
@@ -754,6 +760,8 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 }
 .bin-items{display:flex;flex-wrap:wrap;gap:7px;min-height:36px;}
 .bin-items .pool-card{cursor:default;padding:8px 11px;font-size:13px;min-height:42px;}
+/* Орналастырылған карточкалар басуды өткізеді — себеттің өзі басылсын */
+.bin-items .pool-card,.dz-items .dcard{pointer-events:none;}
 
 /* --------------------------------------------------------------------------
    ЭКСПЕДИЦИЯ КАРТАСЫ
@@ -1058,7 +1066,7 @@ main{max-width:1080px;margin:0 auto;padding:14px 12px 26px;}
 }
 body:not(.has-nav) .toast-wrap{bottom:22px;}
 .toast{
-  pointer-events:auto;width:100%;
+  pointer-events:none;width:100%;
   background:linear-gradient(180deg, rgba(43,29,17,.97), rgba(27,18,11,.97));
   border:1px solid rgba(242,199,108,.45);
   border-radius:var(--r-md);padding:11px 14px;
@@ -1095,6 +1103,35 @@ body:not(.has-nav) .toast-wrap{bottom:22px;}
 .review-q{font-weight:700;font-size:14.5px;color:var(--ink);margin:0 0 5px;}
 .review-a{font-size:13.5px;color:var(--ok);font-weight:700;margin:0 0 4px;}
 .review-e{font-size:13px;color:var(--ink-soft);margin:0;line-height:1.5;}
+
+/* --------------------------------------------------------------------------
+   ЫҚШАМ МОБИЛЬДІ HUD (<600px)
+   -------------------------------------------------------------------------- */
+@media (max-width:599px){
+  .hud-inner{
+    display:grid;grid-template-columns:1fr auto;
+    gap:5px 8px;align-items:start;padding:7px 10px 8px;
+  }
+  .hud-stats{grid-column:1;gap:2px 10px;}
+  .hud-tools{grid-column:2;grid-row:1;margin-left:0;flex-direction:column;gap:4px;}
+  .hud-progress{grid-column:1 / -1;}
+  .icon-btn-txt{display:none;}
+  .icon-btn{padding:5px 9px;min-height:29px;font-size:13px;}
+  .stat{font-size:11.5px;gap:4px;}
+  .stat-ico{font-size:13px;}
+  .hearts{font-size:13px;}
+  .progress-title{font-size:9.5px;letter-spacing:.1em;}
+  .progress-stage{font-size:10px;}
+  .progress-track{height:8px;}
+  .toast{font-size:12.5px;padding:9px 11px;gap:7px;line-height:1.35;}
+  .toast-ico{font-size:16px;}
+  .toast-wrap{width:min(94vw,420px);gap:6px;}
+  .level-head{padding:13px;}
+  .level-desc{font-size:13px;}
+  .task-card{padding:13px;}
+  .dig-tools{gap:6px;}
+  .dig-hint{font-size:12px;}
+}
 
 /* --------------------------------------------------------------------------
    ҰЛТТЫҚ ӨЛШЕМДЕР (≥600px)

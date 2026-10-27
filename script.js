@@ -822,7 +822,7 @@
     node.setAttribute('role', 'status');
     node.innerHTML = '<span class="toast-ico" aria-hidden="true">' + esc(icon || 'ℹ️') + '</span><span>' + esc(msg) + '</span>';
     toastWrap.appendChild(node);
-    while (toastWrap.children.length > 3) { toastWrap.removeChild(toastWrap.firstChild); }
+    while (toastWrap.children.length > 2) { toastWrap.removeChild(toastWrap.firstChild); }
     var life = ms || 2600;
     window.setTimeout(function () {
       node.classList.add('out');
@@ -1104,8 +1104,9 @@
       paint();
       if (left <= 5 && left > 0) { Sound.play('tick'); }
       if (left <= 0) {
+        var f = onEnd;      /* stop() onEnd-ті тазалайды — сондықтан алдын ала сақтаймыз */
         stop();
-        if (typeof onEnd === 'function') { var f = onEnd; onEnd = null; f(); }
+        if (typeof f === 'function') { f(); }
       }
     }
     function stop() {
@@ -1193,6 +1194,7 @@
     closeModal();
     state.level = n;
     save();
+    updateHUD(false);
     showScreen('screen-game');
     renderLevel(n);
   }
@@ -1442,7 +1444,7 @@
       } else {
         paintCell(cell, c, i);
         save();
-        toast('Бос қабат: ' + (c.deco ? c.deco.txt : 'топырақ') + '. Іздеуді жалғастырыңыз!', '', '⛏️', 1700);
+        /* бос қабат — тек визуалды жауап (ұяшықта шағыл тас/тамыр көрінеді) */
       }
     }
 
@@ -1597,7 +1599,7 @@
         if (typeof cfg.onResult === 'function') { cfg.onResult(false); }
         nextButton();
       } else {
-        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.', cfg.hint || '');
+        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.', cfg.tip || cfg.explain || '');
         btns.forEach(function (bb) { if (!bb.classList.contains('wrong')) { bb.disabled = false; } });
       }
       save();
@@ -1640,6 +1642,7 @@
         checkLevelDone(2, 'l2answers');
       },
       onResult: function (ok) {
+        if (ok) { addScore(5); }
         markTaskAnswered('l2answers', idx, ok ? 'ok' : 'bad');
         checkLevelDone(2, 'l2answers');
       }
@@ -2036,6 +2039,7 @@
         attempts: 2,
         loseHeart: true,
         onResult: function (ok) {
+          if (ok) { addScore(5); }
           markTaskAnswered('l4answers', idx, ok ? 'ok' : 'bad');
           checkLevelDone(4, 'l4answers');
         },
@@ -2876,13 +2880,13 @@
             title: 'ЖАҢА ОЙЫН БАСТАУ?',
             body: '<p class="fb-text">Сақталған прогресс (ұпай, артефактілер, деңгейлер) толық өшіріледі және жаңа экспедиция басталады.</p>',
             actions: [
-              { label: '✅ ИӘ, ЖАҢА ОЙЫН', cls: 'btn-gold', onClick: function () { startNewGame(); openLevel(1); toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400); } },
+              { label: '✅ ИӘ, ЖАҢА ОЙЫН', cls: 'btn-gold', onClick: function () { startNewGame(true); openLevel(1); toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400); } },
               { label: '← ЖОҚ, БАС МӘЗІР', cls: 'btn-outline' }
             ]
           });
           return;
         }
-        startNewGame();
+        startNewGame(true);
         openLevel(1);
         toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400);
       });
@@ -2951,9 +2955,9 @@
       'btn-certificate': function () { Sound.play('click'); showScreen('screen-certificate'); },
       'btn-final-museum': function () { Sound.play('click'); showScreen('screen-museum'); },
       'btn-final-timeline': function () { Sound.play('click'); showScreen('screen-timeline'); },
-      'btn-replay': function () { Sound.play('click'); resetAll(); startNewGame(); openLevel(1); },
+      'btn-replay': function () { Sound.play('click'); resetAll(); startNewGame(true); openLevel(1); },
       'btn-final-home': function () { Sound.play('click'); resetAll(); },
-      'btn-over-replay': function () { Sound.play('click'); resetAll(); startNewGame(); openLevel(1); },
+      'btn-over-replay': function () { Sound.play('click'); resetAll(); startNewGame(true); openLevel(1); },
       'btn-over-home': function () { Sound.play('click'); resetAll(); },
       'btn-cert-back': function () { Sound.play('click'); showScreen('screen-final'); }
     };
