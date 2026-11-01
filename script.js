@@ -2876,13 +2876,13 @@
             title: 'ЖАҢА ОЙЫН БАСТАУ?',
             body: '<p class="fb-text">Сақталған прогресс (ұпай, артефактілер, деңгейлер) толық өшіріледі және жаңа экспедиция басталады.</p>',
             actions: [
-              { label: '✅ ИӘ, ЖАҢА ОЙЫН', cls: 'btn-gold', onClick: function () { startNewGame(); openLevel(1); toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400); } },
+              { label: '✅ ИӘ, ЖАҢА ОЙЫН', cls: 'btn-gold', onClick: function () { startNewGame(true); openLevel(1); toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400); } },
               { label: '← ЖОҚ, БАС МӘЗІР', cls: 'btn-outline' }
             ]
           });
           return;
         }
-        startNewGame();
+        startNewGame(true);
         openLevel(1);
         toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400);
       });
@@ -2951,9 +2951,9 @@
       'btn-certificate': function () { Sound.play('click'); showScreen('screen-certificate'); },
       'btn-final-museum': function () { Sound.play('click'); showScreen('screen-museum'); },
       'btn-final-timeline': function () { Sound.play('click'); showScreen('screen-timeline'); },
-      'btn-replay': function () { Sound.play('click'); resetAll(); startNewGame(); openLevel(1); },
+      'btn-replay': function () { Sound.play('click'); resetAll(); startNewGame(true); openLevel(1); },
       'btn-final-home': function () { Sound.play('click'); resetAll(); },
-      'btn-over-replay': function () { Sound.play('click'); resetAll(); startNewGame(); openLevel(1); },
+      'btn-over-replay': function () { Sound.play('click'); resetAll(); startNewGame(true); openLevel(1); },
       'btn-over-home': function () { Sound.play('click'); resetAll(); },
       'btn-cert-back': function () { Sound.play('click'); showScreen('screen-final'); }
     };
