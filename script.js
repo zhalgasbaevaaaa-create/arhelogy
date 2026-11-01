@@ -822,7 +822,7 @@
     node.setAttribute('role', 'status');
     node.innerHTML = '<span class="toast-ico" aria-hidden="true">' + esc(icon || 'ℹ️') + '</span><span>' + esc(msg) + '</span>';
     toastWrap.appendChild(node);
-    while (toastWrap.children.length > 3) { toastWrap.removeChild(toastWrap.firstChild); }
+    while (toastWrap.children.length > 2) { toastWrap.removeChild(toastWrap.firstChild); }
     var life = ms || 2600;
     window.setTimeout(function () {
       node.classList.add('out');
@@ -1104,8 +1104,9 @@
       paint();
       if (left <= 5 && left > 0) { Sound.play('tick'); }
       if (left <= 0) {
+        var f = onEnd;          /* stop() onEnd-ті тазалайды — алдын ала сақтаймыз */
         stop();
-        if (typeof onEnd === 'function') { var f = onEnd; onEnd = null; f(); }
+        if (typeof f === 'function') { f(); }
       }
     }
     function stop() {
@@ -1193,6 +1194,7 @@
     closeModal();
     state.level = n;
     save();
+    updateHUD(false);
     showScreen('screen-game');
     renderLevel(n);
   }
@@ -1442,7 +1444,7 @@
       } else {
         paintCell(cell, c, i);
         save();
-        toast('Бос қабат: ' + (c.deco ? c.deco.txt : 'топырақ') + '. Іздеуді жалғастырыңыз!', '', '⛏️', 1700);
+        /* бос қабат — тек визуалды жауап (ұяшықта шағыл тас/тамыр көрінеді) */
       }
     }
 
@@ -1575,6 +1577,7 @@
         resolved = true;
         setDisabled(true);
         b.classList.add('correct');
+        addScore(typeof cfg.points === 'number' ? cfg.points : 5);
         feedback('ok', '✅ ДҰРЫС!', 'Жауабыңыз қабылданды.', wrong > 0 ? (cfg.tip || cfg.explain || '') : (cfg.tip || ''));
         Sound.play('good');
         if (typeof cfg.onResult === 'function') { cfg.onResult(true); }
@@ -1597,7 +1600,7 @@
         if (typeof cfg.onResult === 'function') { cfg.onResult(false); }
         nextButton();
       } else {
-        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.', cfg.hint || '');
+        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.', cfg.tip || cfg.explain || '');
         btns.forEach(function (bb) { if (!bb.classList.contains('wrong')) { bb.disabled = false; } });
       }
       save();
@@ -2114,9 +2117,9 @@
         explain: t.explain,
         tip: t.explain,
         attempts: 2,
+        points: 10,
         loseHeart: true,
         onResult: function (ok) {
-          if (ok) { addScore(10); }
           markTaskAnswered('l5answers', idx, ok ? 'ok' : 'bad');
           checkLevelDone(5, 'l5answers');
         },
@@ -2162,10 +2165,11 @@
       if (fails >= 3) { fail(); }
     }
 
-    function fail() {
+    function fail(deduct) {
       if (resolved) { return; }
       resolved = true;
       Timer.hide();
+      if (deduct) { state.mistakes++; addScore(-2); }
       markTaskAnswered('l5answers', idx, 'bad');
       loseHeart();
       openModal({
@@ -2257,8 +2261,8 @@
 
     Timer.start(t.timer || 20, function () {
       if (ctrl.isResolved()) { return; }
-      toast('УАҚЫТ БІТТІ!', 'bad', '⏱', 2000);
-      ctrl.fail();
+      toast('УАҚЫТ БІТТІ! −2 ұпай', 'bad', '⏱', 2200);
+      ctrl.fail(true);
     });
   }
 
@@ -2335,8 +2339,8 @@
 
     Timer.start(t.timer || 20, function () {
       if (ctrl.isResolved()) { return; }
-      toast('УАҚЫТ БІТТІ!', 'bad', '⏱', 2000);
-      ctrl.fail();
+      toast('УАҚЫТ БІТТІ! −2 ұпай', 'bad', '⏱', 2200);
+      ctrl.fail(true);
     });
   }
 
@@ -2435,7 +2439,8 @@
         node.classList.add('placed');
         node.classList.remove('selected');
         node.setAttribute('aria-pressed', 'false');
-        node.disabled = true;
+        node.setAttribute('aria-disabled', 'true');
+        node.tabIndex = -1;
         if (node.parentNode !== itemsBox) { itemsBox.appendChild(node); }
         zone.classList.add('flash-ok');
         window.setTimeout(function () { zone.classList.remove('flash-ok'); }, 600);
@@ -2458,8 +2463,8 @@
 
     Timer.start(t.timer || 20, function () {
       if (ctrl.isResolved()) { return; }
-      toast('УАҚЫТ БІТТІ!', 'bad', '⏱', 2000);
-      ctrl.fail();
+      toast('УАҚЫТ БІТТІ! −2 ұпай', 'bad', '⏱', 2200);
+      ctrl.fail(true);
     });
   }
 
@@ -2876,7 +2881,7 @@
             title: 'ЖАҢА ОЙЫН БАСТАУ?',
             body: '<p class="fb-text">Сақталған прогресс (ұпай, артефактілер, деңгейлер) толық өшіріледі және жаңа экспедиция басталады.</p>',
             actions: [
-              { label: '✅ ИӘ, ЖАҢА ОЙЫН', cls: 'btn-gold', onClick: function () { startNewGame(); openLevel(1); toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400); } },
+              { label: '✅ ИӘ, ЖАҢА ОЙЫН', cls: 'btn-gold', onClick: function () { startNewGame(); openLevel(1); } },
               { label: '← ЖОҚ, БАС МӘЗІР', cls: 'btn-outline' }
             ]
           });
@@ -2884,7 +2889,6 @@
         }
         startNewGame();
         openLevel(1);
-        toast('Экспедиция басталды! Сәттілік, зерттеуші!', 'gold', '⛏️', 2400);
       });
     }
 
