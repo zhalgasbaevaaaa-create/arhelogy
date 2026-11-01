@@ -1076,8 +1076,25 @@
     if (id === 'screen-museum') { renderMuseum(); }
     if (id === 'screen-timeline') { renderTimeline(); }
     if (id === 'screen-certificate') { renderCertificate(); }
+    addResultLink(id);
     var main = $('#main');
     if (main) { main.setAttribute('tabindex', '-1'); }
+  }
+
+  /* Экспедиция аяқталған соң кез келген бөлімнен нәтижеге қайту */
+  function addResultLink(screenId) {
+    $$('.result-link').forEach(function (n) { if (n.parentNode) { n.parentNode.removeChild(n); } });
+    if (!state.finished) { return; }
+    if (['screen-museum', 'screen-timeline', 'screen-expedition'].indexOf(screenId) < 0) { return; }
+    var host = $('#' + screenId + ' .panel');
+    if (!host) { return; }
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'btn btn-dark result-link';
+    b.style.marginTop = '12px';
+    b.textContent = '🏆 ЭКСПЕДИЦИЯ НӘТИЖЕСІН КӨРУ';
+    b.addEventListener('click', function () { Sound.play('click'); showFinal(); });
+    host.appendChild(b);
   }
 
   /* ==========================================================================
@@ -1194,7 +1211,6 @@
     closeModal();
     state.level = n;
     save();
-    updateHUD(false);
     showScreen('screen-game');
     renderLevel(n);
   }
@@ -1444,7 +1460,7 @@
       } else {
         paintCell(cell, c, i);
         save();
-        /* бос қабат — тек визуалды жауап (ұяшықта шағыл тас/тамыр көрінеді) */
+        toast('Бос қабат: ' + (c.deco ? c.deco.txt : 'топырақ') + '. Іздеуді жалғастырыңыз!', '', '⛏️', 1700);
       }
     }
 
@@ -1577,7 +1593,6 @@
         resolved = true;
         setDisabled(true);
         b.classList.add('correct');
-        addScore(typeof cfg.points === 'number' ? cfg.points : 5);
         feedback('ok', '✅ ДҰРЫС!', 'Жауабыңыз қабылданды.', wrong > 0 ? (cfg.tip || cfg.explain || '') : (cfg.tip || ''));
         Sound.play('good');
         if (typeof cfg.onResult === 'function') { cfg.onResult(true); }
@@ -1600,7 +1615,7 @@
         if (typeof cfg.onResult === 'function') { cfg.onResult(false); }
         nextButton();
       } else {
-        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.', cfg.tip || cfg.explain || '');
+        feedback('bad', '❌ ҚАТЕ', '−2 ұпай. Тағы ' + (attempts - wrong) + ' мүмкіндігіңіз бар — ойлап көріңіз.', cfg.tip || cfg.explain || cfg.hint || '');
         btns.forEach(function (bb) { if (!bb.classList.contains('wrong')) { bb.disabled = false; } });
       }
       save();
@@ -1643,6 +1658,7 @@
         checkLevelDone(2, 'l2answers');
       },
       onResult: function (ok) {
+        if (ok) { addScore(5); }
         markTaskAnswered('l2answers', idx, ok ? 'ok' : 'bad');
         checkLevelDone(2, 'l2answers');
       }
@@ -2039,6 +2055,7 @@
         attempts: 2,
         loseHeart: true,
         onResult: function (ok) {
+          if (ok) { addScore(5); }
           markTaskAnswered('l4answers', idx, ok ? 'ok' : 'bad');
           checkLevelDone(4, 'l4answers');
         },
@@ -2117,9 +2134,9 @@
         explain: t.explain,
         tip: t.explain,
         attempts: 2,
-        points: 10,
         loseHeart: true,
         onResult: function (ok) {
+          if (ok) { addScore(10); }
           markTaskAnswered('l5answers', idx, ok ? 'ok' : 'bad');
           checkLevelDone(5, 'l5answers');
         },
@@ -2165,11 +2182,10 @@
       if (fails >= 3) { fail(); }
     }
 
-    function fail(deduct) {
+    function fail() {
       if (resolved) { return; }
       resolved = true;
       Timer.hide();
-      if (deduct) { state.mistakes++; addScore(-2); }
       markTaskAnswered('l5answers', idx, 'bad');
       loseHeart();
       openModal({
@@ -2261,8 +2277,8 @@
 
     Timer.start(t.timer || 20, function () {
       if (ctrl.isResolved()) { return; }
-      toast('УАҚЫТ БІТТІ! −2 ұпай', 'bad', '⏱', 2200);
-      ctrl.fail(true);
+      toast('УАҚЫТ БІТТІ!', 'bad', '⏱', 2000);
+      ctrl.fail();
     });
   }
 
@@ -2339,8 +2355,8 @@
 
     Timer.start(t.timer || 20, function () {
       if (ctrl.isResolved()) { return; }
-      toast('УАҚЫТ БІТТІ! −2 ұпай', 'bad', '⏱', 2200);
-      ctrl.fail(true);
+      toast('УАҚЫТ БІТТІ!', 'bad', '⏱', 2000);
+      ctrl.fail();
     });
   }
 
@@ -2439,8 +2455,7 @@
         node.classList.add('placed');
         node.classList.remove('selected');
         node.setAttribute('aria-pressed', 'false');
-        node.setAttribute('aria-disabled', 'true');
-        node.tabIndex = -1;
+        node.disabled = true;
         if (node.parentNode !== itemsBox) { itemsBox.appendChild(node); }
         zone.classList.add('flash-ok');
         window.setTimeout(function () { zone.classList.remove('flash-ok'); }, 600);
@@ -2463,8 +2478,8 @@
 
     Timer.start(t.timer || 20, function () {
       if (ctrl.isResolved()) { return; }
-      toast('УАҚЫТ БІТТІ! −2 ұпай', 'bad', '⏱', 2200);
-      ctrl.fail(true);
+      toast('УАҚЫТ БІТТІ!', 'bad', '⏱', 2000);
+      ctrl.fail();
     });
   }
 
